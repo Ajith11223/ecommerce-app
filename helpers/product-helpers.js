@@ -141,36 +141,13 @@ deleteCategory:(categoryId)=>{
         }
     })
 },
-//get all women products
-getWomenProduct:()=>{
-   return new Promise((resolve,reject)=>{
-    try{
-    db.get().collection(collections.PRODUCT_COLLECTION).find({"category":'Women'}).toArray().then((products)=>{
-        resolve(products)
-    })
-}catch(err){
-    reject(err)
-}
-   })
-},
-//get all men products find category wise men/women
-getMenProduct:()=>{
-    return new Promise((resolve,reject)=>{
-        try{
-     db.get().collection(collections.PRODUCT_COLLECTION).find({"category":'Men'}).toArray().then((products)=>{
-         resolve(products)
-     })
-    }catch(err){
-        reject(err)
-    }
-    })
 
-},
+
 //filter
 getFilterProduct:(filter)=>{
     return new Promise((resolve,reject)=>{
         try{
-        db.get().collection(collections.PRODUCT_COLLECTION).find({"subCategory":filter}).toArray().then((product)=>{
+        db.get().collection(collections.PRODUCT_COLLECTION).find({"category":filter}).toArray().then((product)=>{
             console.log(product);
             resolve(product)
         })
@@ -227,7 +204,9 @@ changeDeliveryStatus:(orderId,status)=>{
         {
            $set:{
 
-             deliveryStatus:status
+             deliveryStatus:status,
+             status:status,
+
             
            }
         }

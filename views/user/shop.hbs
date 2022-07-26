@@ -14,7 +14,7 @@
 <!-- Breadcrumb End -->
 
 <!-- Shop Section Begin -->
-<section class="shop spad" >
+<section class="shop spad">
     <div class="container">
         <div class="row">
 
@@ -35,18 +35,18 @@
                                     <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
                                         <div class="card-body">
                                             <ul>
-                                                <li><a onclick="filter('Kurta')">Kurta</a></li><br>
-                                                <li><a onclick="filter('Tops')">Tops</a></li><br>
-                                                <li><a onclick="filter('Churidar')">Churidar</a></li><br>
-                                                <li><a onclick="filter('WT-Shirt')">WT-Shirt</a></li><br>
-                                                <li><a onclick="filter('W-Shert')">W-Shirt</a><br>
+                                                <li><a onclick="filter('Apple')">Apple</a></li><br>
+                                                <li><a onclick="filter('Samsung')">Samsung</a></li><br>
+                                                <li><a onclick="filter('Realme')">Redme</a></li><br>
+                                                <li><a onclick="filter('Redme')">Realme</a></li><br>
+                                                {{!-- <li><a onclick="filter('W-Shert')">W-Shirt</a><br> --}}
 
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="card">
+                                {{!-- <div class="card">
                                     <div class="card-heading">
                                         <a data-toggle="collapse" data-target="#collapseThree">Men</a>
                                     </div>
@@ -62,7 +62,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 {{!-- kkk --}}
 
@@ -81,7 +81,7 @@
                         </div>
                     </div> --}}
                     <div class="card-body">
-                         <div class="section-title pb-3">
+                        <div class="section-title pb-3">
                             <h4>Sorting</h4>
                         </div>
                         <ul>
@@ -99,27 +99,28 @@
                         <div class="size__list">
                             <ul>
                                 <label for="xxs">
-                                    <li> <a onclick="price('1499')">Under Rs 1499 </a></li>
+                                    <li> <a onclick="price('60000')">Under Rs 60000 </a></li>
                                     {{!-- <input onclick="price('$10-$15')" type="checkbox" id="xxs"> --}}
                                     {{!-- <span class="checkmark"></span> --}}
                                 </label>
                                 <label for="xs">
                                     {{!-- <input type="checkbox" id="xs"> --}}
-                                    <li> <a onclick="price('999')">Under Rs 999 </a></li>
+                                    <li> <a onclick="price('40000')">Under Rs 40000 </a></li>
 
                                 </label>
                                 <label for="xss">
-                                    <li> <a onclick="price('799')">Under Rs 799 </a></li>
+                                    <li> <a onclick="price('30000')">Under Rs 30000 </a></li>
 
                                 </label>
                                 <label for="s">
-                                    <li> <a onclick="price('599')"> Under Rs 599 </a></li>
+                                    <li> <a onclick="price('20000')"> Under Rs 20000 </a></li>
 
                                 </label>
                                 <label for="m">
-                                    <li> <a onclick="price('399')">Under Rs 399  </a></li>
+                                    <li> <a onclick="price('10000')">Under Rs 10000 </a></li>
 
                                 </label>
+                            
                             </ul>
 
 
@@ -183,7 +184,7 @@
 
                     <div class="col-lg-4 col-md-2">
                         <div class="product__item">
-                            <div >
+                            <div>
                                 <img src="/product-images/{{this._id}}.jpeg" alt="">
 
                                 <div class="label new">New</div>
@@ -222,8 +223,8 @@
 
                     <div class="col-lg-4 col-md-2">
                         <div class="product__item">
-                            <div class="product__item__pic set-bg " >
-                              <img src="/product-images/{{this._id}}.jpeg" alt="">
+                            <div class="product__item__pic set-bg ">
+                                <img src="/product-images/{{this._id}}.jpeg" alt="">
 
                                 <div class="label new">New</div>
                                 <ul class="product__hover">
@@ -255,13 +256,13 @@
 
                     </div>
                     {{/each}}
-                   {{else}}
+                    {{else}}
                     {{#each products}}
 
                     <div class="col-lg-4 col-md-2">
                         <div class="product__item">
-                            <div class="product__item__pic set-bg " >
-                            <img src="/product-images/{{this._id}}.jpeg" alt="">
+                            <div class="product__item__pic set-bg ">
+                                <img src="/product-images/{{this._id}}.jpeg" alt="">
 
                                 <div class="label new">New</div>
                                 <ul class="product__hover">
@@ -308,7 +309,14 @@
                                         let count = $('#cart-count').html()
                                         count = parseInt(count) + 1
                                         $("#cart-count").html(count)
-                                        alert('cart added')
+                                      
+                                        Swal.fire({
+                                            position: 'top-end',
+                                            icon: 'success',
+                                            title: 'Added to cart',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        })
                                         $('#cartadd').load(location.href + ' #cartadd')
                                     }
 
@@ -324,7 +332,7 @@
                                 success: (response) => {
                                     if (response.logged) {
                                         $('#wishadd').load(location.href + ' #wishadd')
- 
+
                                         swal('Added successful')
                                     } else {
                                         swal('wishlist removed')
@@ -385,9 +393,9 @@
             url: '/filter/' + type,
             method: 'get',
             success: (response) => {
-               //location.href = '/shop'
+                //location.href = '/shop'
                 $("#shopdiv").load(location.href + " #shopdiv");
-              //  $("#shopdiv").load(location.href+" #shopdiv>*","");
+                //  $("#shopdiv").load(location.href+" #shopdiv>*","");
 
             }
 
@@ -414,10 +422,10 @@
             url: '/sort/' + typeSort,
             method: 'get'
              success: (response) => {
-               // location.href = '/shop'
-                 $("#shopdiv").load(location.href + " #shopdiv");
+                // location.href = '/shop'
+                $("#shopdiv").load(location.href + " #shopdiv");
 
-             }
+            }
 
         })
     }

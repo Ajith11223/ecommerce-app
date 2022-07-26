@@ -18,16 +18,20 @@
                 <nav class="header__menu">
                     <ul>
                         <li class="active"><a href="/">Home</a></li>
-                        <li><a href="/womens">Women’s</a></li>
-                        <li><a href="/mens">Men’s</a></li>
+                         {{!-- <li><a href="/womens">Women’s</a></li> --}}
+                        
                         <li><a  href="/shop" >Shop</a></li>
+                         <li><a href="/orders">Orders</a></li> 
+
+                           {{!-- <li><a href="/orders">Orders</a></li>  --}}
+
                         {{#if users}}
                         <li><a href="#">Pages</a>
                             <ul class="dropdown">
                               
                                 <li><a href="/product-cart">Cart Items</a></li>
                                 <li><a href="/checkout">Checkout</a></li>
-                                <li><a href="/filter">Filter</a></li>
+                                {{!-- <li><a href="/filter">Filter</a></li> --}}
                             </ul>
                         </li>
 

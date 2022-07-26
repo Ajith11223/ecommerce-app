@@ -221,9 +221,13 @@ router.get('/product-cart', verifyLogin, async (req, res,next) => {
   if(products.length>0){
     total = await userHelpers.getTotalAmount(users._id)
   }
-  
-  res.render('user/product-cart',
+  if(cartCount > 0){
+    res.render('user/product-cart',
     { user: true, layout: 'user-layouts', users, products, cartCount, total,wishListCount})
+  }else{
+    res.redirect('/empty')
+  }
+ 
   }catch(err){
     console.log(err);
     next(err)
@@ -291,50 +295,6 @@ router.get('/checkout', verifyLogin, async (req, res,next) => {
   { user:true,layout: 'user-layouts', users, cartCount, total,wishListCount })
 }catch(err){
   console.log(err);
-  next(err)
-}
-})
-// womens page rendering
-router.get('/womens', async (req, res,next) => {
-  let users = req.session.user
-  let cartCount = null
-  let wishListCount=null
-  try{
-  if (req.session.user) {
-    cartCount = await userHelpers.getCartCount(users._id)
-    wishListCount=await userHelpers.getWishListCount(users._id)
-
-  }
-  //womens product get
-  productHelpers.getWomenProduct().then((products) => {
-    productHelpers.getFilterProduct(req.session.filter).then((product)=>{              
-
-    res.render('user/womens',
-     { user: true, layout: 'user-layouts', users, cartCount, products,product ,wishListCount})
-  })
-  })
-}catch(err){
-  next(err)
-}
-})
-
-//mens page rendering and product listing
-router.get('/mens', async (req, res,next) => {
-  let users = req.session.user
-  let cartCount = null
-  let wishListCount=null
-try{
-  if (req.session.user) {
-    cartCount = await userHelpers.getCartCount(users._id)
-    wishListCount=await userHelpers.getWishListCount(users._id)
-
-  }
-  //mens product get
-  productHelpers.getMenProduct().then((products) => {
-    res.render('user/mens',
-     { user: true, layout: 'user-layouts', users, cartCount, products ,wishListCount})
-  })
-}catch(err){
   next(err)
 }
 })
@@ -466,14 +426,22 @@ router.get('/orders',verifyLogin,async(req,res,next)=>{
   let users = req.session.user
   let cartCount = null
   let wishListCount=null
+  let orderCount=null
   
   if (req.session.user) {
     cartCount = await userHelpers.getCartCount(users._id)
      wishListCount=await userHelpers.getWishListCount(users._id)
+     orderCount=await userHelpers.getOrderCount(users._id)
+     console.log(orderCount);
  }
   let  products=await userHelpers.orderProduct(users._id)
-  res.render('user/orders',
-  {user:true,layout:'user-layouts',users,cartCount,wishListCount,products})
+  if(orderCount > 0){
+    res.render('user/orders',
+    {user:true,layout:'user-layouts',users,cartCount,wishListCount,products})
+  }else{
+    res.redirect('/emptyOrder')
+  }
+ 
 }catch(err){
   next(err)
 }
@@ -491,8 +459,10 @@ router.get('/view-order-products/:id',verifyLogin,async(req,res,next)=>{
  }
   let products=await userHelpers.getOrderProduct(req.params.id)
   let notActive=products.notActive
+  let  product=await userHelpers.orderProduct(users._id)
+
   res.render('user/view-order-products',
-  {user:true,layout:'user-layouts',users,cartCount,wishListCount,products,notActive})
+  {user:true,layout:'user-layouts',users,cartCount,wishListCount,products,notActive,product})
 }catch(err){
   next(err)
 }
@@ -650,8 +620,34 @@ router.post('/search',async(req,res,next)=>{
     
   }
 })
+// empty page rendering
+router.get('/empty',async(req,res)=>{
+  let users = req.session.user
+  const userId = req.session.user._id
+  let cartCount = null
+  let wishListCount=null
 
+  if (req.session.user) {
+    cartCount = await userHelpers.getCartCount(users._id)
+    wishListCount=await userHelpers.getWishListCount(users._id)
 
+  }
+  res.render('user/empty',{user:true,layout:'user-layouts',users,cartCount,wishListCount})
+})
+// empty order rendr
+router.get('/emptyOrder',async(req,res)=>{
+  let users = req.session.user
+  const userId = req.session.user._id
+  let cartCount = null
+  let wishListCount=null
+
+  if (req.session.user) {
+    cartCount = await userHelpers.getCartCount(users._id)
+    wishListCount=await userHelpers.getWishListCount(users._id)
+  }
+
+  res.render('user/emptyOrder',{user:true,layout:'user-layouts',users,cartCount,wishListCount})
+})
 
 
 

@@ -4,7 +4,7 @@
     <div class="container">
         <a class="add btn btn-danger " href="/admin/add-products" >Add Product</a>
         <a class="add btn btn-danger " href="/admin/categoryadd" >Add Category</a>
-        <a class="add btn btn-danger " href="/admin/subcategory" >Add Sub Category</a>
+        {{!-- <a class="add btn btn-danger " href="/admin/subcategory" >Add Sub Category</a> --}}
 
         <table class="table mt-5 " id="productsTable">
   <thead>
@@ -12,7 +12,7 @@
       <th scope="col">No</th>
       <th scope="col">Titile</th>
       <th scope="col">category</th>
-      <th scope="col">Sub Category</th>
+      {{!-- <th scope="col">Sub Category</th> --}}
       <th scope="col">description</th>
        <th scope="col">Price</th>
        <th scope="col">Stock</th>
@@ -28,7 +28,7 @@
       
       <td>{{this.name}}</td>
       <td>{{this.category}}</td>
-      <td>{{this.subCategory}}</td>
+      {{!-- <td>{{this.subCategory}}</td> --}}
       <td>{{this.description}}</td>
       <td>Rs{{this.price}}</td>
       <td>{{this.stock}}</td>

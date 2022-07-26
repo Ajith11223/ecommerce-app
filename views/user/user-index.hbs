@@ -6,10 +6,10 @@
                 <div class="categories__item categories__large__item set-bg"
                     data-setbg="/banner-images/{{banner.[0]._id}}.jpeg">
                     <div class="categories__text">
-                        <h1>Women’s fashion</h1>
-                        <p>Sitamet, consectetur adipiscing elit, sed do eiusmod tempor incidid-unt labore
+                        <h1 class="text-light">Trends</h1>
+                        <p class="text-light">Sitamet, consectetur adipiscing elit, sed do eiusmod tempor incidid-unt labore
                             edolore magna aliquapendisse ultrices gravida.</p>
-                        <a href="/shop">Shop now</a>
+                        <a class="text-light" href="/shop">Shop now</a>
                     </div>
                 </div>
             </div>
@@ -18,18 +18,18 @@
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
                         <div class="categories__item set-bg" data-setbg="/banner-images/{{banner.[1]._id}}.jpeg">
                             <div class="categories__text">
-                                <h4>Men’s fashion</h4>
-                                <p>358 items</p>
-                                <a href="/shop">Shop now</a>
+                                <h4 class="text-light">New Gen</h4>
+                                <p class="text-light">358 items</p>
+                                <a class="text-light" href="/shop">Shop now</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
                         <div class="categories__item set-bg" data-setbg="/banner-images/{{banner.[2]._id}}.jpeg">
                             <div class="categories__text">
-                                <h4>Women’s fashion</h4>
-                                <p>273 items</p>
-                                <a href="/shop">Shop now</a>
+                                <h4 class="text-light">Forien </h4>
+                                <p class="text-light">273 items</p>
+                                <a class="text-light" href="/shop">Shop now</a>
                             </div>
                         </div>
                     </div>
@@ -45,9 +45,9 @@
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
                         <div class="categories__item set-bg" data-setbg="/banner-images/{{banner.[4]._id}}.jpeg">
                             <div class="categories__text">
-                                <h4>Casuals</h4>
-                                <p>792 items</p>
-                                <a href="/shop">Shop now</a>
+                                <h4 class="text-light">Casuals Type</h4>
+                                <p class="text-light">792 items</p>
+                                <a class="text-light" href="/shop">Shop now</a>
                             </div>
                         </div>
                     </div>
@@ -115,7 +115,14 @@
                                         let count = $('#cart-count').html()
                                         count = parseInt(count) + 1
                                         $("#cart-count").html(count)
-                                        alert('cart added')
+                                       
+                                        Swal.fire({
+                                            position: 'top-end',
+                                            icon: 'success',
+                                            title: 'Added to cart',
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        })
                                         $('#cartadd').load(location.href + ' #cartadd')
                                     }
 
@@ -148,29 +155,29 @@
 <!-- Product Section End -->
 
 <!-- Banner Section Begin -->
-<section class="banner set-bg " data-setbg="/user/img/banner/banner-1.jpg">
+<section class="banner set-bg " data-setbg="/banner-images/{{banner.[3]._id}}.jpeg">
     <div class="container ">
         <div class="row">
             <div class="col-xl-7 col-lg-8 m-auto">
                 <div class="banner__slider owl-carousel">
                     <div class="banner__item">
                         <div class="banner__text">
-                            <span>The Chloe Collection</span>
-                            <h1>The Project Jacket</h1>
+                            <span>The Big Collection</span>
+                            <h1>The Formal Types</h1>
+                            <a href="/shop">Shop now</a>
+                        </div>
+                    </div>
+                    <div class="banner__item">
+                        <div class="banner__text">
+                            <span>The Forien Types</span>
+                            <h1>The Casuls</h1>
                             <a href="#">Shop now</a>
                         </div>
                     </div>
                     <div class="banner__item">
                         <div class="banner__text">
-                            <span>The Chloe Collection</span>
-                            <h1>The Project Jacket</h1>
-                            <a href="#">Shop now</a>
-                        </div>
-                    </div>
-                    <div class="banner__item">
-                        <div class="banner__text">
-                            <span>The Chloe Collection</span>
-                            <h1>The Project Jacket</h1>
+                            <span>Apple</span>
+                            <h1>The Most Poppular</h1>
                             <a href="#">Shop now</a>
                         </div>
                     </div>
@@ -191,7 +198,7 @@
 
                 <div class="trend__content">
                     <div class="section-title">
-                        <h4>CATEGORIES TO BAG</h4>
+                        <h4>Offer Zone</h4>
                     </div>
                     <div class="row">
                         {{#each categories}}
@@ -216,198 +223,27 @@
                         </div>
                         {{/each}}
                     </div>
-                    {{!--
-                    <div class="trend__item">
-                        <div class="trend__item__pic">
-                            <img src="/user/img/trend/ht-2.jpg" alt="">
-                        </div>
-                        <div class="trend__item__text">
-                            <h6>Pendant earrings</h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product__price">$ 59.0</div>
-                        </div>
-                    </div> --}}
-                    {{!-- <div class="trend__item">
-                        <div class="trend__item__pic">
-                            <img src="/user/img/trend/ht-3.jpg" alt="">
-                        </div>
-                        <div class="trend__item__text">
-                            <h6>Cotton T-Shirt</h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product__price">$ 59.0</div>
-                        </div>
-                    </div> --}}
+                   
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="trend__content">
-                    {{!-- <div class="section-title">
-                        <h4>Best seller</h4>
-                    </div> --}}
-                    {{!-- <div class="trend__item">
-                        <div class="trend__item__pic">
-                            <img src="/user/img/trend/bs-1.jpg" alt="">
-                        </div>
-                        <div class="trend__item__text">
-                            <h6>Cotton T-Shirt</h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product__price">$ 59.0</div>
-                        </div>
-                    </div> --}}
-                    {{!-- <div class="trend__item">
-                        <div class="trend__item__pic">
-                            <img src="/user/img/trend/bs-2.jpg" alt="">
-                        </div>
-                        <div class="trend__item__text">
-                            <h6>Zip-pockets pebbled tote <br />briefcase</h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product__price">$ 59.0</div>
-                        </div>
-                    </div> --}}
+                   
                     <div class="trend__item">
-                        {{!-- <div class="trend__item__pic">
-                            <img src="/user/img/trend/bs-3.jpg" alt="">
-                        </div> --}}
-                        {{!-- <div class="trend__item__text">
-                            <h6>Round leather bag</h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product__price">$ 59.0</div>
-                        </div> --}}
+                       
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6">
                 <div class="trend__content">
-                    {{!-- <div class="section-title">
-                        <h4>Feature</h4>
-                    </div> --}}
-                    {{!-- <div class="trend__item">
-                        <div class="trend__item__pic">
-                            <img src="/user/img/trend/f-1.jpg" alt="">
-                        </div>
-                        <div class="trend__item__text">
-                            <h6>Bow wrap skirt</h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product__price">$ 59.0</div>
-                        </div>
-                    </div> --}}
-                    {{!-- <div class="trend__item">
-                        <div class="trend__item__pic">
-                            <img src="/user/img/trend/f-2.jpg" alt="">
-                        </div>
-                        <div class="trend__item__text">
-                            <h6>Metallic earrings</h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product__price">$ 59.0</div>
-                        </div>
-                    </div> --}}
-                    {{!-- <div class="trend__item">
-                        <div class="trend__item__pic">
-                            <img src="/user/img/trend/f-3.jpg" alt="">
-                        </div>
-                        <div class="trend__item__text">
-                            <h6>Flap cross-body bag</h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product__price">$ 59.0</div>
-                        </div>
-                    </div> --}}
+                   
                 </div>
             </div>
 
         </div>
     </div>
 </section>
-<!-- Trend Section End -->
 
-<!-- Discount Section Begin -->
-<section class="discount">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 p-0">
-                <div class="discount__pic">
-                    <img src="/user/img/discount.jpg" alt="">
-                </div>
-            </div>
-            <div class="col-lg-6 p-0">
-                <div class="discount__text">
-                    <div class="discount__text__title">
-                        <span>Discount</span>
-                        <h2>Summer 2022</h2>
-                        <h5><span>Sale</span> 50%</h5>
-                    </div>
-                    <div class="discount__countdown" id="countdown-time">
-                        <div class="countdown__item">
-                            <span>22</span>
-                            <p>Days</p>
-                        </div>
-                        <div class="countdown__item">
-                            <span>18</span>
-                            <p>Hour</p>
-                        </div>
-                        <div class="countdown__item">
-                            <span>46</span>
-                            <p>Min</p>
-                        </div>
-                        <div class="countdown__item">
-                            <span>05</span>
-                            <p>Sec</p>
-                        </div>
-                    </div>
-                    <a href="#">Shop now</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Discount Section End -->
 
 <!-- Services Section Begin -->
 <section class="services spad">

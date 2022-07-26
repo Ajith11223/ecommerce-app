@@ -676,7 +676,20 @@ module.exports = {
                 
             }
         })
+    },
+    // order count
+    getOrderCount: (userId) => {
+        return new Promise(async (resolve, reject) => {
+            try{
+            let count = 0
+            let order = await db.get().collection(collections.ORDER_COLLECTION).find({ userId: ObjectId(userId) }).count()
+          
+            resolve(order)
+        }catch(err){
+            reject(err)
+        }
+        })
+  
     }
+
 }
-
-

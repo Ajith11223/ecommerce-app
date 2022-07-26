@@ -109,12 +109,12 @@
                                 login at the top of the page.</p> --}}
                             <label for="check-payment">
                                 COD
-                                <input type="checkbox" id="check-payment" name="payment-method" value="COD">
+                                <input type="radio" id="check-payment" name="payment-method" value="COD" required >
                                 <span class="checkmark"></span>
                             </label>
                             <label for="paypal">
                                 Online
-                                <input type="checkbox" id="paypal" name="payment-method" value="online">
+                                <input type="radio" id="paypal" name="payment-method" value="online" required >
                                 <span class="checkmark"></span>
                             </label>
                         </div>
@@ -188,7 +188,7 @@
             method: 'post',
             success:(response)=>{
                 if(response.status){
-                    alert('suc')
+                    {{!-- alert('suc') --}}
                location.href = ('/user-order')
 
                 }else{
