@@ -1,0 +1,94 @@
+<section class="p-9">
+    <div class="row mt-4">
+         <div class="col-6">
+        {{!-- <a class="add btn btn-danger " href="/admin/add-products">Add Product</a> --}}
+        <a class="add btn btn-danger " href="/admin/categoryadd">Add Category</a>
+
+        <table class="table mt-5 " id="productsTable">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Titile</th>
+
+
+
+                </tr>
+            </thead>
+            <tbody>
+                {{#each addCategory}}
+                <tr>
+                    <th scope="row">{{inc @index}}</th>
+
+                    <td>{{this.name}}</td>
+
+                    <td>
+                        <a href="/admin/edit-categoryadd/{{this._id}}" class="btn btn-success">Edit</a>
+                        <a href="/admin/delete-categoryadd/{{this._id}}" onclick="return confirm('Are you sure')"
+                            class="btn btn-danger">Delete</a>
+
+                    </td>
+                </tr>
+                {{/each}}
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-6">
+         <div class="col">
+         <a class="add btn btn-danger " href="/admin/subcategory">Add Sub Category</a>
+
+        <table class="table mt-5 " id="productsTable">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Titile</th>
+
+
+
+                </tr>
+            </thead>
+            <tbody>
+                {{#each subcategory}}
+                <tr>
+                    <th scope="row">{{inc @index}}</th>
+
+                    <td>{{this.name}}</td>
+
+                    <td>
+                        <a href="/admin/edit-subcategory/{{this._id}}" class="btn btn-success">Edit</a>
+                        <a href="/admin/delete-subcategory/{{this._id}}" onclick="return confirm('Are you sure')"
+                            class="btn btn-danger">Delete</a>
+
+                    </td>
+                </tr>
+                {{/each}}
+
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+    </div>
+    
+   
+
+
+</section>
+
+    
+
+<script>
+
+    $(document).ready(function () {
+
+
+        $('#productsTable').wrap('<div id="hide" style="display:none"/>');
+
+        $('#hide').css('display', 'block');
+    });
+
+
+    var table = $('#productsTable').DataTable();
+
+
+</script>

@@ -1,0 +1,51 @@
+<section class="p-9 ">
+   <div class="container mt-4">
+      <div class="row">
+         <div class="col-md-6">
+            <h2 class="text-center"> Add Product</h2>
+            <form action="/user-addprofile" method="post" enctype="multipart/form-data" id="profileadd" class="text-danger">
+              <label for="" class="text-dark">Name</label><br>
+               <input type="text" name="name" class="form-control" required><br>
+               <input type="text" name="userId" class="form-control" id="" value="{{userId}}" hidden>
+             <label for="" class="text-dark">Last Name</label><br>
+               <input type="text" name="lastname" class="form-control" required><br>
+
+               <label for="" class="text-dark">Adress</label><br>
+               <input type="text" name="adress" class="form-control" required><br>
+                <label for="" class="text-dark">State</label><br>
+               <input type="text" name="state" class="form-control" required><br>
+                <label for="" class="text-dark">Mobile</label><br>
+               <input type="number" name="mobile" class="form-control" required><br>
+                <label for="" class="text-dark">Email</label><br>
+               <input type="text" name="email" class="form-control" required><br>
+
+
+
+
+               <label for="" class="text-dark">Image</label><br>
+               <input type="file" name="image" class="form-control" required><br>
+
+               <button type="submit" class="btn btn-primary mt-4">Submit</button>
+
+            </form>
+
+         </div>
+      </div>
+   </div>
+</section>
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+  </script>
+<script
+  type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js">
+  </script>
+<script>
+  $("#profileadd").validate();
+</script>
+
+
+
+
+

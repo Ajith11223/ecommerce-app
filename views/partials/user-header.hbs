@@ -1,0 +1,132 @@
+<!-- Page Preloder -->
+{{!-- <div id="preloder">
+    <div class="loader"></div>
+</div> --}}
+
+
+<!-- Header Section Begin -->
+<header class="header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-3 col-lg-2">
+                <div class="header__logo">
+                    {{!-- <a href="#"><img class="logo" src="/images/logo.jpg" alt=""></a> --}}
+                    <h2 class="text-center text-dark  text-uppercase text-muted   w-50  "><b>Fashion</b></h2>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-7">
+                <nav class="header__menu">
+                    <ul>
+                        <li class="active"><a href="/">Home</a></li>
+                        <li><a href="/womens">Women’s</a></li>
+                        <li><a href="/mens">Men’s</a></li>
+                        <li><a  href="/shop" >Shop</a></li>
+                        {{#if users}}
+                        <li><a href="#">Pages</a>
+                            <ul class="dropdown">
+                              
+                                <li><a href="/product-cart">Cart Items</a></li>
+                                <li><a href="/checkout">Checkout</a></li>
+                                <li><a href="/filter">Filter</a></li>
+                            </ul>
+                        </li>
+
+                       
+                        {{/if}}
+                       
+                        <li><a href="#">Contact</a></li>
+                        {{!-- login--------------------------------------- --}}
+                      
+                        {{#if users}}
+                        <li><a href="#">Profile</a>
+                        
+                            <ul class="dropdown">
+                                <li><a href="#">Welcome,{{users.name}}</a></li>
+                                <li><a href="/orders">Order</a></li>
+                                <li><a href="/user-profile">Profile</a></li>
+                                <li><a href="/logout">logout</a></li>
+                               
+                            </ul>
+                            
+                        </li>
+                        {{else}}                      
+                        <li><a href="#">Account</a>
+                        
+                            <ul class="dropdown">
+                                <li><a href="/login">Login</a></li>
+                                <li><a href="/signup">Signup</a></li>
+                             
+                            </ul>
+                            
+                        </li>
+                        {{/if}}
+                   
+                    
+                    
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-lg-3">
+                <div class="header__right">
+                    <div class="header__right__auth">
+                        {{!-- // --}}
+
+                        {{!-- --}}
+                    </div>
+                    <ul class="header__right__widget">
+
+                        <li><span class="icon_search search-switch"></span></li>
+                        {{#if users}}
+                        <li><a id="wishadd"  href="/user-wishlist"><span class="icon_heart_alt"></span>
+                                <div class="tip">{{wishListCount}}</div>
+                            </a></li>
+                        <li><a href="/product-cart" id="cartadd"><span class="icon_bag_alt "></span>
+                                <div class="tip" id="cart-count">{{cartCount}}</div>
+                            </a></li>
+                            {{/if}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="canvas__open">
+            <i class="fa fa-bars"></i>
+        </div>
+    </div>
+</header>
+<!-- Header Section End -->
+ <script>
+        function filter(type){
+            $.ajax({
+                url:'/filter/'+type,
+                method:'get',
+                success:(response)=>{
+                   location.href='/shop'
+                    // $("#shopdiv").load(location.href + " #shopdiv");
+                     //$("#shopdiv").load(location.href+" #shopdiv>*","");
+
+                }
+                
+            })
+        }
+    </script>
+                <script>
+                        function wishList(productId) {
+                            $.ajax({
+                                url: '/add-wish-list/' + productId,
+                                method: 'get',
+                                success: (response) => {
+                                    if (response.logged) {
+                                        $('#wishadd').load(location.href + ' #wishadd')
+
+                                        alert('added success')
+                                        swal('Added successful')
+                                    } else {
+                                        swal('wishlist removed')
+                                        $('#wishadd').load(location.href + ' #wishadd')
+
+
+                                    }
+                                }
+                            })
+                        }
+                    </script>

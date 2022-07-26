@@ -1,0 +1,51 @@
+
+{{!-- <h3 bg-danger>Admin Login</h3> --}}
+{{!-- <section class=" vh-100 bg-image"
+      style="background-image: url('');"> --}}
+<body class="main-bg p-10">
+  <!-- Login Form -->
+ <div>
+  {{!-- <h2>Fashion</h2> --}}
+ </div>
+  <div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="card shadow">
+          <div class="card-title text-center border-bottom">
+            <h2 class="p-3">Admin Login</h2>
+            {{#if loginError}}
+            <p class="text-danger">{{loginError}}</p>    
+            {{/if}}
+            
+          </div>
+          <div class="card-body">
+            <form action="/admin/login" method="post" id="adminlogin">
+              <div class="mb-4">
+                
+                <label for="username" class="form-label"  >Email</label>
+                <input type="text" class="form-control" name="email" id="username" required />
+              </div>
+              <div class="mb-4">
+                <label for="password" class="form-label" >Password</label>
+                <input type="password" class="form-control" id="password" name="password"  required/>
+              </div>
+             
+              <div class="d-grid">
+                <button type="submit"  class="btn text-dark bg-gradient-danger"><b>Login<b></button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+{{!-- </section> --}}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js">
+</script>
+<script>
+  $("#adminlogin").validate();
+</script>
+

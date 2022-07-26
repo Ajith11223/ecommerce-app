@@ -1,0 +1,65 @@
+<section class="p-9" >
+    <div class="row mt-4">
+    </div>
+    <div class="container">
+        <a class="add btn btn-danger " href="/admin/add-products" >Add Product</a>
+        <a class="add btn btn-danger " href="/admin/categoryadd" >Add Category</a>
+        <a class="add btn btn-danger " href="/admin/subcategory" >Add Sub Category</a>
+
+        <table class="table mt-5 " id="productsTable">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Titile</th>
+      <th scope="col">category</th>
+      <th scope="col">Sub Category</th>
+      <th scope="col">description</th>
+       <th scope="col">Price</th>
+       <th scope="col">Stock</th>
+
+        <th>image</th>
+        <th>Option</th>
+    </tr>
+  </thead>
+  <tbody>
+      {{#each products}}
+    <tr>
+      <th scope="row">{{inc @index}}</th>
+      
+      <td>{{this.name}}</td>
+      <td>{{this.category}}</td>
+      <td>{{this.subCategory}}</td>
+      <td>{{this.description}}</td>
+      <td>Rs{{this.price}}</td>
+      <td>{{this.stock}}</td>
+      <td><img class="#" width="60px" height="60px" src="/product-images/{{this._id}}.jpeg" alt=""></td>
+     <td>
+      <a href="/admin/edit-product/{{this._id}}"  class="btn btn-success">Edit</a>
+      <a href="/admin/delete-product/{{this._id}}" onclick="return confirm('Are you sure')" class="btn btn-danger">Delete</a>
+
+     </td>
+    </tr>
+    {{/each}}
+   
+  </tbody>
+</table>
+    </div>
+
+
+</section>
+<script>
+
+  $(document).ready(function () {
+
+
+    $('#productsTable').wrap('<div id="hide" style="display:none"/>');
+
+    $('#hide').css('display', 'block');
+  });
+
+
+  var table = $('#productsTable').DataTable();
+
+
+</script>
+

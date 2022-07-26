@@ -1,0 +1,45 @@
+<section class="p-9 " >
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="text-center"> Edit Category</h2>
+                <form action="/admin/edit-category/{{categories._id}}" method="post" enctype="multipart/form-data">
+                    <label for="">Product Name</label>
+                    <input type="text" name="name" class="form-control" value="{{categories.name}}">
+
+                  <label for="cars">category</label><br>
+               <select class="form-control" name="category" id="cars">
+                  <option value="Please Select">{{categories.category}}</option>
+                  <option value="Women's">Women’s</option>
+                  <option value="Men">Men's</option>                  
+               </select>
+               {{!-- sub category --}}
+              
+                    {{!-- <input type="text" name="category" class="form-control" value="{{product.category}}"> --}}
+                    
+                       <label for="">Price</label>
+                    <input type="number" name="price" class="form-control" value="{{categories.price}}">
+                    
+                     
+                       <label for="">Image</label>
+                      <img src="/category-images/{{categories._id}}.jpeg" class="pl-5" alt="" width="90px" height="100px" id="imgView">
+
+                    <input type="file" name="image" class="form-control" onchange="viewImage(event)">
+                    
+
+                    <button type="submit" class="btn btn-primary mt-4"  >Submit</button>
+                    
+                </form>
+                
+            </div>
+        </div>
+     </div>
+</section>
+<script>
+
+    function viewImage(event){
+        document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
+    }
+</script>
+
+

@@ -1,0 +1,161 @@
+
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="/"><i class="fa fa-home"></i> Home</a>
+                        <span>Shopping cart</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Shop Cart Section Begin -->
+    <section class="shop-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12" id="deleteDiv">
+                    <div class="shop__cart__table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    {{!-- <th>Total</th> --}}
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each products}}
+                               
+                                <tr>
+                                   
+                                    
+                                    <td class="cart__product__item">
+                                       
+                                        <img width="180px" height="170px" src="/product-images/{{this.products._id}}.jpeg" alt="">
+                                        <div class="cart__product__item__title">
+                                            <h6>{{this.products.name}}</h6>
+                                            {{!-- {{/each}} --}}
+                                            <div class="rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            
+                                        </div>
+                                         
+                                    </td>
+                                    {{!-- {{/each}} --}}
+                                   
+                                    
+                                    <td class="cart__price">$ {{this.products.price}}</td>
+                                     
+                                    <td class="cart__quantity">
+                                       
+                                        <button class="cart-item-count mr-3" onclick="changeQuantity('{{this._id}}','{{this.products._id}}','{{../users._id}}','{{this.products.stock}}',-1)" >-</button>
+                                      <span id="{{this.products._id}}">{{this.quantity}}</span>
+                                        <button class="cart-item-count ml-3" onclick="changeQuantity('{{this._id}}','{{this.products._id}}','{{../users._id}}','{{this.products.stock}}',1)" >+</button>
+                                       
+                                    </td>
+                                    {{!-- <td class="cart__total">{{total}}</td> --}}
+                                    <td class="cart__close"  ><button onclick="deleteCart('{{this._id}}','{{this.products._id}}')" >Delete</button></span></td>
+                                </tr>
+                                {{/each}}
+                                
+                          
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="cart__btn">
+                        <a href="/shop">Continue Shopping</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                   
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                   
+                </div>
+                <div class="col-lg-4 offset-lg-2">
+                    <div class="cart__total__procced">
+                        <h6>Cart total</h6>
+                        <ul>
+                            {{!-- <li>Subtotal <span>Rs. {{total}}.00</span></li> --}}
+                            <li>Total Amount <span>Rs.<span id="totalPrice">{{total}}.00</span></span></li>
+                        </ul>
+                        <a href="/checkout" class="primary-btn">Proceed to checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shop Cart Section End -->
+    <script>
+        function changeQuantity(cartId,productId,userId,stock,count){
+            let quantity=parseInt(document.getElementById(productId).innerHTML)
+            if(quantity+count<=stock){
+
+            count=parseInt(count)
+            $.ajax({
+                url:'/change-pproduct-quantity',
+                data:{
+                user:userId,
+                cart:cartId,
+                product:productId,
+                count:count,
+                quantity:quantity
+                },
+                method:'post',
+                success:(response)=>{
+                   if(response.removeProduct){
+                    alert('Product removed from cart')
+                    location.reload()
+                   }else{
+                    document.getElementById(productId).innerHTML=quantity+count
+                    document.getElementById('totalPrice').innerHTML=response.total+'.00'
+                   }
+                }
+            })
+            }else{
+                alert('stockeedin')
+            }
+            
+        }
+    </script>
+    <script>
+        function deleteCart(cartId,productId){
+            $.ajax({
+                url:'/delete-cart',
+                 data:{
+                cart:cartId,
+                product:productId               
+                },
+                method:'post',
+                 success:(response)=>{
+                   if(response.removedProduct){
+                    alert('Product removed from cart')
+                   // location.reload()
+                    $("#deleteDiv").load(location.href + " #deleteDiv ");
+
+                   }else{
+                    alert('error')
+                   }
+                }
+            })
+        }
+    </script>

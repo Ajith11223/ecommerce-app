@@ -1,0 +1,32 @@
+<section class="p-9 ">
+   <div class="container mt-4">
+      <div class="row">
+         <div class="col-md-6">
+            <h2 class="text-center"> Add Banner</h2>
+            <form action="/admin/add-banner" method="post" enctype="multipart/form-data" id="product">
+               <label for="">Name</label>
+               <input type="text" name="name" class="form-control" required>
+               {{!-- <label for="">Status</label>
+               <input type="text" name="status" class="form-control" required> --}}
+
+
+               <label for="">Image</label>
+               <input type="file" name="image" class="form-control" required>
+
+               <button type="submit" class="btn btn-primary mt-4">Submit</button>
+
+            </form>
+
+         </div>
+      </div>
+   </div>
+</section>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js">
+</script>
+<script>
+  $("#product").validate();
+</script>
+

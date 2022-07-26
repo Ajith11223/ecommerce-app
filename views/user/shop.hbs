@@ -1,0 +1,425 @@
+<!-- Breadcrumb Begin -->
+<div class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__links">
+                    <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                    <span>Shop</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+<!-- Shop Section Begin -->
+<section class="shop spad" >
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-3 col-md-3">
+                <div class="shop__sidebar">
+                    <div class="sidebar__categories">
+
+                        <div class="section-title">
+                            <h4>Categories</h4>
+                        </div>
+                        <div class="categories__accordion">
+                            <div class="accordion" id="accordionExample">
+
+                                <div class="card">
+                                    <div class="card-heading active">
+                                        <a data-toggle="collapse" data-target="#collapseOne">Women</a>
+                                    </div>
+                                    <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <ul>
+                                                <li><a onclick="filter('Kurta')">Kurta</a></li><br>
+                                                <li><a onclick="filter('Tops')">Tops</a></li><br>
+                                                <li><a onclick="filter('Churidar')">Churidar</a></li><br>
+                                                <li><a onclick="filter('WT-Shirt')">WT-Shirt</a></li><br>
+                                                <li><a onclick="filter('W-Shert')">W-Shirt</a><br>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-heading">
+                                        <a data-toggle="collapse" data-target="#collapseThree">Men</a>
+                                    </div>
+                                    <div id="collapseThree" class="collapse" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <ul>
+                                                <li><a onclick="filter('Shirt')">Shirt</a></li><br>
+                                                <li><a onclick="filter('T-Shirt')">T-Shirt</a></li><br>
+                                                <li><a onclick="filter('Formal-Shirt')">Formal-Shirt</a></li><br>
+                                                <li><a onclick="filter('Jeans')">Jeans</a></li><br>
+                                                <li><a onclick="filter('Casuals')">Casuals</a><br>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{!-- kkk --}}
+
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    {{!-- <div class="sidebar__filter">
+                        <div class="section-title">
+                            <h4>Shop by price</h4>
+
+                        </div>
+                    </div> --}}
+                    <div class="card-body">
+                         <div class="section-title pb-3">
+                            <h4>Sorting</h4>
+                        </div>
+                        <ul>
+                            <li><a onclick="sort1('1')">Low to High</a></li><br>
+                            <li><a onclick="sort1('-1')">High to Low</a></li><br>
+
+
+                        </ul>
+                    </div>
+
+                    <div class="sidebar__sizes">
+                        <div class="section-title">
+                            <h4>Shop by Price</h4>
+                        </div>
+                        <div class="size__list">
+                            <ul>
+                                <label for="xxs">
+                                    <li> <a onclick="price('1499')">Under Rs 1499 </a></li>
+                                    {{!-- <input onclick="price('$10-$15')" type="checkbox" id="xxs"> --}}
+                                    {{!-- <span class="checkmark"></span> --}}
+                                </label>
+                                <label for="xs">
+                                    {{!-- <input type="checkbox" id="xs"> --}}
+                                    <li> <a onclick="price('999')">Under Rs 999 </a></li>
+
+                                </label>
+                                <label for="xss">
+                                    <li> <a onclick="price('799')">Under Rs 799 </a></li>
+
+                                </label>
+                                <label for="s">
+                                    <li> <a onclick="price('599')"> Under Rs 599 </a></li>
+
+                                </label>
+                                <label for="m">
+                                    <li> <a onclick="price('399')">Under Rs 399  </a></li>
+
+                                </label>
+                            </ul>
+
+
+                        </div>
+                    </div>
+                    <div class="sidebar__color">
+                        <div class="section-title">
+                            <h4>Shop by Color</h4>
+                        </div>
+                        <div class="size__list color__list">
+                            <label for="black">
+                                Blacks
+                                <input type="checkbox" id="black">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="whites">
+                                Whites
+                                <input type="checkbox" id="whites">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="reds">
+                                Reds
+                                <input type="checkbox" id="reds">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="greys">
+                                Greys
+                                <input type="checkbox" id="greys">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="blues">
+                                Blues
+                                <input type="checkbox" id="blues">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="beige">
+                                Beige Tones
+                                <input type="checkbox" id="beige">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="greens">
+                                Greens
+                                <input type="checkbox" id="greens">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="yellows">
+                                Yellows
+                                <input type="checkbox" id="yellows">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class=" col-md-8">
+                <div class="row" id="shopdiv">
+                    {{#if product}}
+                    {{#each product }}
+
+
+                    <div class="col-lg-4 col-md-2">
+                        <div class="product__item">
+                            <div >
+                                <img src="/product-images/{{this._id}}.jpeg" alt="">
+
+                                <div class="label new">New</div>
+                                <ul class="product__hover">
+                                    <li><a href="/product-images/{{this._id}}.jpeg" class="image-popup"><span
+                                                class="arrow_expand"></span></a></li>
+                                    <li><a href="#" onclick="wishList('{{this._id}}')"><span
+                                                class="icon_heart_alt"></span></a></li>
+                                    <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                </ul>
+                            </div>
+                            <div class="product__item__text">
+                                {{!-- <h6><a href="#">{{this.name}}</a></h6> --}}
+                                <h6><a href="/product-details/{{this._id}}">{{this.name}}</a></h6>
+
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div class="product__price">Rs{{this.price}}</div>
+                                <button onclick="addCart('{{this._id}}')" class="cart-btn ml-2 btn-primary"><span
+                                        class="icon_bag_alt "></span>Add Cart</button>
+
+                                {{!-- <a class="btn btn-primary" href="/add-cart/{{this.id}}">Add Cart</a> --}}
+                            </div>
+                        </div>
+
+                    </div>
+                    {{/each}}
+                    {{else if priceF}}
+                    {{#each priceF}}
+
+
+                    <div class="col-lg-4 col-md-2">
+                        <div class="product__item">
+                            <div class="product__item__pic set-bg " >
+                              <img src="/product-images/{{this._id}}.jpeg" alt="">
+
+                                <div class="label new">New</div>
+                                <ul class="product__hover">
+                                    <li><a href="/product-images/{{this._id}}.jpeg" class="image-popup"><span
+                                                class="arrow_expand"></span></a></li>
+                                    <li><a href="#" onclick="wishList('{{this._id}}')"><span
+                                                class="icon_heart_alt"></span></a></li>
+                                    <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                </ul>
+                            </div>
+                            <div class="product__item__text">
+                                {{!-- <h6><a href="#">{{this.name}}</a></h6> --}}
+                                <h6><a href="/product-details/{{this._id}}">{{this.name}}</a></h6>
+
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div class="product__price">Rs{{this.price}}</div>
+                                <button onclick="addCart('{{this._id}}')" class="cart-btn ml-2 btn-primary"><span
+                                        class="icon_bag_alt "></span>Add Cart</button>
+
+                                {{!-- <a class="btn btn-primary" href="/add-cart/{{this.id}}">Add Cart</a> --}}
+                            </div>
+                        </div>
+
+                    </div>
+                    {{/each}}
+                   {{else}}
+                    {{#each products}}
+
+                    <div class="col-lg-4 col-md-2">
+                        <div class="product__item">
+                            <div class="product__item__pic set-bg " >
+                            <img src="/product-images/{{this._id}}.jpeg" alt="">
+
+                                <div class="label new">New</div>
+                                <ul class="product__hover">
+                                    <li><a href="/product-images/{{this._id}}.jpeg" class="image-popup"><span
+                                                class="arrow_expand"></span></a></li>
+                                    <li><a href="#" onclick="wishList('{{this._id}}')"><span
+                                                class="icon_heart_alt"></span></a></li>
+                                    <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                                </ul>
+                            </div>
+                            <div class="product__item__text">
+                                {{!-- <h6><a href="#">{{this.name}}</a></h6> --}}
+                                <h6><a href="/product-details/{{this._id}}">{{this.name}}</a></h6>
+
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div class="product__price">Rs{{this.price}}</div>
+                                <button onclick="addCart('{{this._id}}')" class="cart-btn ml-2 btn-primary"><span
+                                        class="icon_bag_alt "></span>Add Cart</button>
+
+                                {{!-- <a class="btn btn-primary" href="/add-cart/{{this.id}}">Add Cart</a> --}}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {{/each}}
+                    {{/if}}
+
+
+                    {{!-- scripss cart --}}
+                    <script>
+                        function addCart(productId) {
+                            $.ajax({
+                                url: '/add-cart/' + productId,
+                                method: 'get',
+                                success: (response) => {
+                                    if (response.status) {
+                                        let count = $('#cart-count').html()
+                                        count = parseInt(count) + 1
+                                        $("#cart-count").html(count)
+                                        alert('cart added')
+                                        $('#cartadd').load(location.href + ' #cartadd')
+                                    }
+
+                                }
+                            })
+                        }
+                    </script>
+                    <script>
+                        function wishList(productId) {
+                            $.ajax({
+                                url: '/add-wish-list/' + productId,
+                                method: 'get',
+                                success: (response) => {
+                                    if (response.logged) {
+                                        $('#wishadd').load(location.href + ' #wishadd')
+ 
+                                        swal('Added successful')
+                                    } else {
+                                        swal('wishlist removed')
+                                        $('#wishadd').load(location.href + ' #wishadd')
+
+
+                                    }
+                                }
+                            })
+                        }
+                    </script>
+
+                    <div class="col-lg-4 col-md-6">
+
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="product__item">
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="product__item">
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="product__item sale">
+
+                        </div>
+                    </div>
+                    <div class="col-lg-12 text-center">
+                        <div class="pagination__option">
+                            <a href="#">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                            <a href="#"><i class="fa fa-angle-right"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Shop Section End -->
+<script>
+    function filter(type) {
+        $.ajax({
+            url: '/filter/' + type,
+            method: 'get',
+            success: (response) => {
+               //location.href = '/shop'
+                $("#shopdiv").load(location.href + " #shopdiv");
+              //  $("#shopdiv").load(location.href+" #shopdiv>*","");
+
+            }
+
+        })
+    }
+</script>
+<script>
+    function price(typePrice) {
+        $.ajax({
+            url: '/price/' + typePrice,
+            method: 'get',
+            success: (response) => {
+                //location.href = '/shop'
+                $("#shopdiv").load(location.href + " #shopdiv");
+
+            }
+
+        })
+    }
+</script>
+<script>
+    function sort1(typeSort) {
+        $.ajax({
+            url: '/sort/' + typeSort,
+            method: 'get'
+             success: (response) => {
+               // location.href = '/shop'
+                 $("#shopdiv").load(location.href + " #shopdiv");
+
+             }
+
+        })
+    }
+
+</script>

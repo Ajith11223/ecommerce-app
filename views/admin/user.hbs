@@ -1,0 +1,64 @@
+
+  
+
+<section class="p-12 ">
+  <div class="row mt-4">
+  </div>
+
+  <table class="table mt-5 " id="productsTable">
+    <thead>
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Mobile No</th>
+        <th scope="col">Options</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+      {{#each user}}
+      <tr>
+        <th scope="row">{{inc @index}}</th>
+
+        <td>{{this.name}}</td>
+        <td>{{this.email}}</td>
+        <td>{{this.phone}}</td>
+        {{!-- <td>{{this.}}</td> --}}
+        <td>
+          
+{{#if this.blockUser}}
+          <a href="/admin/user/unblock_user/{{this._id}}" onclick="return confirm('Are you sure unblock')" class="btn btn-danger">Unblock</a>
+        </td>
+        {{else}}
+
+          <a href="/admin/user/block_user/{{this._id}}" onclick="return confirm('Are you sure block')" class="btn btn-success">Block</a>
+
+{{/if}}
+
+
+
+      </tr>
+
+      {{/each}}
+
+    </tbody>
+  </table>
+</section>
+<script>
+
+  $(document).ready(function () {
+
+
+    $('#productsTable').wrap('<div id="hide" style="display:none"/>');
+
+    $('#hide').css('display', 'block');
+  });
+
+
+  var table = $('#productsTable').DataTable();
+
+
+</script>
+

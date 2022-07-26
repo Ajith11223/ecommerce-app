@@ -1,0 +1,96 @@
+<h3 class="p-5 mx-auto">My wishlist</h3>
+
+<div class=" col-md-9">
+    <div class="row">
+        {{#each products}}
+
+        <div class="col-lg-3 col-md-2 p-5 pl-5">
+            <div class="product__item" id="deleteWish">
+                <div class="product__item__pic set-bg ml-5 mr-3 "
+                    data-setbg="/product-images/{{this.products._id}}.jpeg">
+                    <div class="label new">New</div>
+                    <ul class="product__hover">
+                        <li><a href="/product-images/{{this.products._id}}.jpeg" class="image-popup"><span
+                                    class="arrow_expand"></span></a></li>
+                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                    </ul>
+                </div>
+                <div class="product__item__text">
+                    {{!-- <h6><a href="#">{{this.name}}</a></h6> --}}
+                    <h6><a href="/product-details/{{this.products._id}}">{{this.products.name}}</a></h6>
+
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <div class="product__price">${{this.products.price}}</div>
+                    <button onclick="addCart('{{this.products._id}}')" class="cart-btn ml-2 btn-primary"><span
+                            class="icon_bag_alt "></span>Add Cart</button><br>
+                    <button onclick="remove('{{this._id}}','{{this.products._id}}')"
+                        class="cart-btn ml-2 btn-primary mt-2 "><span class="icon_bag_alt "></span>Remove</button>
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+        {{/each}}
+    </div>
+
+</div>
+
+
+
+
+{{!-- scripts --}}
+<script>
+    function remove(cartId, productId) {
+        if (confirm('Are you sure')) {
+            $.ajax({
+                url: '/remove-wishlist',
+                data: {
+                    cart: cartId,
+                    product: productId
+                },
+                method: 'post',
+                success: (response) => {
+                    if (response.removedWishList) {
+                        // alert('Product removed from wishlist')
+
+                        location.reload()
+                        $("#deleteWish").load(location.href + " #deleteWish ");
+
+                    } else {
+                        alert('error')
+                    }
+                }
+            })
+        }
+
+    }
+</script>
+<script>
+    function addCart(productId) {
+        $.ajax({
+            url: '/add-cart/' + productId,
+            method: 'get',
+            success: (response) => {
+                if (response.status) {
+                    let count = $('#cart-count').html()
+                    count = parseInt(count) + 1
+                    $("#cart-count").html(count)
+                    alert('cart added')
+                    $('#cartadd').load(location.href + ' #cartadd')
+                }
+
+            }
+        })
+    }
+</script>

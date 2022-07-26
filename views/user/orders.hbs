@@ -1,0 +1,42 @@
+<section style="min-height: 70vh;">
+  <table class="table table-bordered" style="height: 14vh;">
+  <thead>
+    <tr>
+      <th scope="col">NO</th>
+      <th scope="col">NAME</th>
+      <th scope="col">PAYMENT</th>
+      {{!-- <th scope="col">Quantity</th> --}}
+      <th scope="col">MOBILE</th>
+      {{!-- <th scope="col">STATUS</th> --}}
+      <th scope="col">ORDER DATE</th>
+      <th scope="col">AMOUNT</th>
+      <th scope="col">ADRESS</th>    
+      <th scope="col">OPTIONS</th>
+       <th scope="col">ORDER STATUS</th>
+
+    </tr>
+  </thead>
+ 
+  <tbody>
+    {{#each products}}
+    <tr>
+      <th scope="row">{{inc @index}}</th>
+      <td>{{this.deliveryAdress.name}}</td>
+      <td>{{this.paymentMethod}}</td>
+      {{!-- <td>{{this.products.[0].quantity}}</td> --}}
+      <td>{{this.deliveryAdress.mobile}}</td>
+      {{!-- <td>{{this.status}}</td> --}}
+      <td>{{this.deliveryAdress.date}}</td>
+      <td>{{this.deliveryAdress.totalAmount}}</td>
+      <td>{{this.deliveryAdress.adress}},{{this.deliveryAdress.country}},{{this.deliveryAdress.state}},{{this.deliveryAdress.city}},{{this.deliveryAdress.pincode}}</td>
+      <td>
+       <a href="/view-order-products/{{this._id}}"><button class="btn btn-success my-2 py-2">View Producs</button></a> <br>
+       <a href="/delete-order-products/{{this._id}}"><button class="btn btn-danger" onclick="return confirm('Are you sure')" >Cancel Order</button></a> <br>
+      </td>
+      <td>{{this.deliveryStatus}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+  
+</table>
+</section>

@@ -1,0 +1,58 @@
+<section class="p-9 " >
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="text-center"> Edit Product</h2>
+                <form action="/admin/edit-product/{{product._id}}" method="post" enctype="multipart/form-data">
+                    <label for="">Product Name</label>
+                    <input type="text" name="name" class="form-control" value="{{product.name}}">
+
+                  <label for="cars">category</label><br>
+               <select class="form-control" name="category" id="cars">
+                  <option value="Please select">choose</option>
+                  {{#each category}}
+                  <option value="{{this.name}}">{{this.name}}</option>
+                    {{/each}}             
+               </select>
+               {{!-- sub category --}}
+              
+               <label for="cars">Sub Category</label><br>
+               <select class="form-control" name="subCategory" id="cars">
+                  <option value="please selecet" >choose</option>
+                  {{#each subCategory}}
+                  <option value="{{this.name}}" >{{this.name}}</option>
+               {{/each}}
+               </select>
+                    {{!-- <input type="text" name="category" class="form-control" value="{{product.category}}"> --}}
+                    
+                       <label for="">Price</label>
+                    <input type="number" name="price" class="form-control" value="{{product.price}}">
+                     <label for="">Stock</label>
+                 <input type="number" name="stock" class="form-control" value="{{product.stock}}" required>
+
+                    
+                       <label for="">description</label>
+                    <input type="text" name="description" class="form-control" value="{{product.description}}">
+                    
+                       <label for="">Image</label>
+                      <img src="/product-images/{{product._id}}.jpeg" class="pl-5" alt="" width="90px" height="100px" id="imgView">
+
+                    <input type="file" name="image" class="form-control" onchange="viewImage(event)">
+                    
+
+                    <button type="submit" class="btn btn-primary mt-4"  >Submit</button>
+                    
+                </form>
+                
+            </div>
+        </div>
+     </div>
+</section>
+<script>
+
+    function viewImage(event){
+        document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
+    }
+</script>
+
+

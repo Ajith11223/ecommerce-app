@@ -1,0 +1,72 @@
+<section style="min-height: 70vh;">
+    <div class="container">
+  <div class="row">
+    <div class="col-12" id="canceldiv">
+        <h3 class="text-primary p-3 " >Orderd Products</h3>
+		<table class="table table-image">
+		  <thead>
+		    <tr>
+		      <th scope="col">NO</th>		   
+		      <th scope="col">Image</th>
+		      <th scope="col" >QUANTITY</th>
+		      <th scope="col">PRICE</th>
+		      <th scope="col">CATEGORY</th>
+		      <th scope="col">SUBCATEGORY</th>
+		      <th scope="col">STATUS</th>
+		      <th scope="col">OPTION</th>
+
+		    </tr>
+		  </thead>
+		  <tbody>
+            {{#each products}}
+		    <tr>
+		      <th scope="row">{{inc @index}}</th>
+		      <td class="w-25">
+			      <img src="/product-images/{{this.products._id}}.jpeg" width="250" height="240px" alt="Sheep">
+                  <hr>
+		      </td>
+		      <td>{{this.quantity}}</td>
+		      <td>{{this.products.price}}</td>
+    	      <td>{{this.products.category}}</td>
+		      <td>{{this.products.subCategory}}</td>
+			 <td>{{this.status}}</td> 
+
+              <td>
+                <a href="/" class="btn btn-primary mb-3" >Back to Home</a><br>
+				{{#if notActive}}
+                <a href="/orders" class="btn btn-success mb-3">Back to Order</a><br>
+		    	{{else}}
+				<a href="" onclick="cancel('{{this._id}}','{{this.item}}')"  class="btn btn-danger ">Cancel Order</a>
+               {{/if}}
+
+              </td>
+
+		    </tr>
+		    {{/each}}
+		  </tbody>
+		</table>   
+        <b><hr></b>
+    </div>
+  </div>
+</div>
+
+</section>
+<script>
+	function cancel(order,product){
+		$.ajax({
+			url:'/cancel-order',
+			data:{
+				orderId:order,
+				productId:product
+			},
+			method:'post',
+			success:(response)=>{
+                 if(status){
+	        $("#canceldiv").load(location.href + " #canceldiv");
+
+				 }                                 
+			}
+			
+		})
+	}
+</script>

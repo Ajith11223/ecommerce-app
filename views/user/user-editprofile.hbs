@@ -1,0 +1,58 @@
+<section class="p-9 ">
+   <div class="container mt-4">
+      <div class="row">
+         <div class="col-md-6">
+            <h2 class="text-center"> Edit Profile</h2>
+            <form action="/user-editprofile/{{profile._id}}" method="post" enctype="multipart/form-data" id="profile">
+               <label for="">Name</label>
+               <input type="text" name="name" value="{{profile.name}}" class="form-control" required>
+               <input type="text" name="userId" class="form-control" id="" value="{{profile.userId}}" hidden>
+             <label for="">Last Name</label>
+               <input type="text" name="lastname" value="{{profile.lastname}}" class="form-control" required>
+
+               <label for="">Adress</label>
+               <input type="text" name="adress" value="{{profile.adress}}" class="form-control" required>
+                <label for="">State</label>
+               <input type="text" name="state" value="{{profile.state}}" class="form-control" required>
+                <label for="">Mobile</label>
+               <input type="number" name="mobile" value="{{profile.mobile}}" class="form-control" required>
+                <label for="">Email</label>
+               <input type="text" name="email" value="{{profile.email}}" class="form-control" required>
+
+
+
+
+               <label for="">Image</label>
+                 <img src="/profile-images/{{profile._id}}.jpeg" class="pl-5" alt="" width="90px" height="100px" id="imgView">
+
+               <input type="file" name="image"  class="form-control"  onchange="viewImage(event)" >
+
+               <button type="submit" class="btn btn-primary mt-4">Submit</button>
+
+            </form>
+
+         </div>
+      </div>
+   </div>
+</section>
+<script>
+    function viewImage(event){
+        document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
+    }
+</script>
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+  </script>
+<script
+  type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js">
+  </script>
+<script>
+  $("#profile").validate();
+</script>
+
+
+
+
+

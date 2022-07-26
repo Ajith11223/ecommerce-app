@@ -1,0 +1,225 @@
+
+
+
+  
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <div class="card">
+            <div class="card-body p-3">
+              <div class="row">
+                <div class="col-8">
+                  <div class="numbers">
+                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Revenue</p>
+                    <h5 class="font-weight-bolder">
+                    Rs. {{totalCost.[0].sum}}
+                    </h5>
+                    {{!-- <p class="mb-0">
+                      <span class="text-success text-sm font-weight-bolder">+5%</span>
+                      since yesterday
+                    </p> --}}
+                  </div>
+                </div>
+                <div class="col-4 text-end">
+                  <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                    <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <div class="card">
+            <div class="card-body p-3">
+              <div class="row">
+                <div class="col-8">
+                  <div class="numbers">
+                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Users</p>
+                    <h5 class="font-weight-bolder">
+                  {{totalUser}}
+                    </h5>
+                   
+                  </div>
+                </div>
+                <div class="col-4 text-end">
+                  <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
+                    <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <div class="card">
+            <div class="card-body p-3">
+              <div class="row">
+                <div class="col-8">
+                  <div class="numbers">
+                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Canceled Order</p>
+                    <h5 class="font-weight-bolder">
+                     {{cancelOrder}}
+                    </h5>
+                   
+                  </div>
+                </div>
+                <div class="col-4 text-end">
+                  <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
+                    <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6">
+          <div class="card">
+            <div class="card-body p-3">
+              <div class="row">
+                <div class="col-8">
+                  <div class="numbers">
+                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total orders</p>
+                    <h5 class="font-weight-bolder">
+                     {{totalOrder}}
+                    </h5>
+                   
+                  </div>
+                </div>
+                <div class="col-4 text-end">
+                  <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
+                    <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        {{!-- <canvas id="earning">
+
+      </canvas>
+
+     --}}
+    <div class="col-4 py-9 p-3" style="margin-left: 100px;" >
+        <div class="row">
+          <h3 class="p-2">Cash Receiving</h3>
+          <hr>
+      <div class="card">
+        <canvas id="myChart"> 
+
+        </canvas>
+
+      </div>
+    
+    </div>
+
+    </div>
+     <div class="col-4" style="margin-left:800px ; margin-top: -600px; ">
+        <div class="row">
+          <h3 class="p-2">Order Status</h3>
+          <hr>
+
+      <div class="card">
+        <canvas id="earning"> 
+
+        </canvas>
+
+      </div>
+    
+    </div>
+
+    </div>
+
+
+
+
+     
+
+
+      <footer class="footer pt-3  ">
+        <div class="container-fluid p-12" >
+          <div class="row align-items-center justify-content-lg-between">
+            <div class="col-lg-6 mb-lg-0 mb-4">
+          
+            </div>
+            <div class="col-lg-6">
+              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                <li class="nav-item">
+                  <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
+                </li>
+                <li class="nav-item">
+                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
+                </li>
+                <li class="nav-item">
+                  <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
+                </li>
+                <li class="nav-item">
+                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </main>
+ 
+        <!-- Sidenav Type -->
+       
+        
+       
+      </div>
+    </div>
+  </div>
+ 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+<script type="text/javascript"></script>
+
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Cod-{{cod}}','Online -{{count}}'],
+                datasets: [{
+                    label: 'payment methods',
+                    data: [{{totalCod}},{{count}}],
+                backgroundColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54,162,235,1)',
+                    'rgba(255,206,86,1)'
+                ],
+            }]
+
+        },
+            options: {
+            responsive: true,
+        },
+            })
+
+var earning = document.getElementById('earning').getContext('2d');
+    var myChart = new Chart(earning, {
+        type: 'bar',
+        data: {
+            labels: ['Placed', 'Shipped', 'Delivered', 'Cancelled',],
+            datasets: [{
+                label: 'Order Status',
+                data: [{{placed}},{{shipped}},{{deliverd}},{{cancel}}],
+            backgroundColor: [
+                'rgba(255, 206, 86, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(60, 170, 70, 1)',
+                'rgba(255, 0, 0, 1)',
+            ],
+        }]
+    },
+        options: {
+        responsive: true,
+    }
+    });
+
+
+     
+     </script>
