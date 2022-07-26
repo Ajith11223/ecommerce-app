@@ -13,7 +13,7 @@ const userHelpers = require('../helpers/user-helpers')
 const twilioHelpers = require('../helpers/twilio-helpers')
 
 
-
+let searchProducts;
 
 const verifyLogin = (req, res, next) => {
   if (req.session.loggedIn) {
@@ -183,10 +183,13 @@ router.get('/shop', async (req, res,next) => {
   //   })
     productHelpers.getFilterProduct(req.session.filter).then((product)=>{              
      productHelpers.getFilterPrice(req.session.priceFilter).then((priceF)=>{ 
+      if(searchProducts){
+        products=searchProducts
+      }
        
         res.render('user/shop',
         { user: true, products, layout: 'user-layouts', users, cartCount,product,priceF,wishListCount })
-
+              searchProducts=null;
   })
 })
   
@@ -633,6 +636,19 @@ router.post('/cancel-order',verifyLogin,(req,res,next)=>{
 }catch(err){
   next(err)
 }
+})
+// search
+router.post('/search',async(req,res,next)=>{
+  try {
+     searchProducts=await userHelpers.searchProduct(req.body.search)
+     console.log(searchProducts);
+     res.redirect('/shop')
+    
+  } catch (err) {
+    console.log(err);
+    next(err)
+    
+  }
 })
 
 

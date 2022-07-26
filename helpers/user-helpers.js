@@ -657,6 +657,25 @@ module.exports = {
                 reject(err)
             }
         })
+    },
+    // search
+    searchProduct:(data)=>{
+        return new Promise(async(resolve,reject)=>{
+            try {
+                let products=await db.get().collection(collections.PRODUCT_COLLECTION).find({
+                    '$or':[
+                        {name:{$regex:data,$options:'i'}},
+                        {subCategory:{$regex:data,$options:'i'}}
+
+                    ]
+                }).toArray()
+                resolve(products)
+                
+            } catch (err) {
+                reject(err)
+                
+            }
+        })
     }
 }
 
