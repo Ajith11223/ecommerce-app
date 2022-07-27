@@ -37,16 +37,15 @@ try{
     wishListCount=await userHelpers.getWishListCount(users._id)
   } 
   productHelpers.getAllProducts().then((products) => {
-    productHelpers.getAllCategory().then((categories) => {
       userHelpers.getBannerProducts().then((banner)=>{
         console.log(banner);
         res.render('user/user-index',
-        { user: true, layout: 'user-layouts', users, products, categories, cartCount,wishListCount,banner})
+        { user: true, layout: 'user-layouts', users, products, cartCount,wishListCount,banner})
       })
      
 
 
-    })
+    
 
   })
 }catch(err){

@@ -194,19 +194,6 @@ router.post('/add-products',verifyLogin,(req,res)=>{
   }
 })
 
-//category items rendering
-router.get('/category',verifyLogin,(req,res,next)=>{
-  try{
-  producthelpers.getAllCategory().then((categories)=>{
-    res.render('admin/category',
-    {admin:true,layout:'admin-layouts',categories})
-    
-  })
-}catch(err){
-  console.log(err);
-  next(err)
-}
-})
 
 
 // add category rendering
@@ -221,24 +208,7 @@ router.get('/add-category',verifyLogin,(req,res)=>{
 
 
 
-// add-category 
-router.post('/add-category',verifyLogin,(req,res)=>{
-  try{
-  producthelpers.addCategory(req.body,(id)=>{
-    let imagec=req.files.image
-    imagec.mv('./public/category-images/'+id+'.jpeg',(err,done)=>{
-      if(!err){
-        res.render('admin/add-category')
-      }else{
-        console.log(err);
-      }
-    })
-    res.redirect('/admin/category')
-  })
-}catch(err){
-  console.log(err);
-}
-})
+
 
 
 // edit-product rendering
@@ -284,21 +254,7 @@ router.get('/edit-category/:id',verifyLogin,async(req,res,next)=>{
     next(err)
   }
 })
-//edit category
-router.post('/edit-category/:id',verifyLogin,(req,res,next)=>{
-  try{
-  producthelpers.editCategory(req.body,req.params.id).then(()=>{
-    res.redirect('/admin/category')
-    if(req.files.image){
-      let image=req.files.image
-      image.mv('./public/category-images/'+id+'.jpeg')
-    }
-  })
-}catch(err){
-  console.log(err);
-  next(err)
-}
-})
+
 //delete product
 router.get('/delete-product/:id',verifyLogin,(req,res,next)=>{
   try{
@@ -312,19 +268,7 @@ router.get('/delete-product/:id',verifyLogin,(req,res,next)=>{
   next(err)
 }
 })
-//category delete
-router.get('/delete-category/:id',verifyLogin,(req,res,next)=>{
-try{
-  const categoryId=req.params.id
-  producthelpers.deleteCategory(categoryId).then((response)=>{
-    console.log(response);
-    res.redirect('/admin/category')
-  })
-}catch(err){
-  console.log(err);
-  next(err)
-}
-})
+
 
 //m order status
 router.get('/order-status',verifyLogin,(req,res,next)=>{

@@ -39,16 +39,7 @@ module.exports={
         })
     },
     //get all category
-    getAllCategory:()=>{
-        return new Promise(async(resolve,reject)=>{
-            try{
-            let categories=await db.get().collection(collections.CATEGORY_COLLECTION).find().toArray()
-            resolve(categories)
-            }catch(err){
-                reject(err)
-            }
-        })
-    }, 
+ 
     //edit product details 
     getProductDetails:(productId)=>{
         return new Promise((resolve,reject)=>{
@@ -87,24 +78,24 @@ module.exports={
         })
 
     },
-    // edit category
-    editCategory:(categoryDetails,categoryId)=>{
+    // // edit category
+    // editCategory:(categoryDetails,categoryId)=>{
        
-        return new Promise((resolve,reject)=>{
-            try{
-            db.get().collection(collections.CATEGORY_COLLECTION).updateOne({_id:objectId(categoryId)},{
-                $set:{
-                    name:categoryDetails.name,
-                    category:categoryDetails.category,
-                    price:categoryDetails.price
-                }
-            }).then((response)=>{
-                  resolve(response)
-            })}catch(err){
-                reject(err)
-            }
-        })
-    },
+    //     return new Promise((resolve,reject)=>{
+    //         try{
+    //         db.get().collection(collections.CATEGORY_COLLECTION).updateOne({_id:objectId(categoryId)},{
+    //             $set:{
+    //                 name:categoryDetails.name,
+    //                 category:categoryDetails.category,
+    //                 price:categoryDetails.price
+    //             }
+    //         }).then((response)=>{
+    //               resolve(response)
+    //         })}catch(err){
+    //             reject(err)
+    //         }
+    //     })
+    // },
     // delete product
     deleteProduct:(productId)=>{
         return new Promise((resolve,reject)=>{

@@ -33,7 +33,7 @@
             </tbody>
         </table>
     </div>
-    <div class="col-6">
+    {{!-- <div class="col-6">
          <div class="col">
          <a class="add btn btn-danger " href="/admin/subcategory">Add Sub Category</a>
 
@@ -47,10 +47,10 @@
 
                 </tr>
             </thead>
-            {{!-- <tbody>
+            <tbody>
                 {{#each subcategory}}
                 <tr>
-                    <th scope="row">{{inc @index}}</th>
+                    <th scope="row">{{inc }}</th>
 
                     <td>{{this.name}}</td>
 
@@ -63,10 +63,10 @@
                 </tr>
                 {{/each}}
 
-            </tbody> --}}
+            </tbody>
         </table>
     </div>
-    </div>
+    </div> --}}
 
     </div>
     
@@ -79,16 +79,18 @@
 
 <script>
 
-    $(document).ready(function () {
+  $(document).ready(function () {
 
 
-        $('#productsTable').wrap('<div id="hide" style="display:none"/>');
+    $('#productsTable').wrap('<div id="hide" style="display:none"/>');
 
-        $('#hide').css('display', 'block');
-    });
+    $('#hide').css('display', 'block');
+  });
 
 
-    var table = $('#productsTable').DataTable();
+  var table = $('#productsTable').DataTable();
 
 
 </script>
+
+
