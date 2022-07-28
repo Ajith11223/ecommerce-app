@@ -47,9 +47,8 @@ router.get('/',verifyLogin, async function(req, res,next) {
     adminHelpers.totalDeliveryStatus(delivery.cancel),
     adminHelpers.totalCost(),
   ]) ;  
-  console.log(allData);
     res.render('admin/admin-dashboard',
-    {admin:true,layout:'admin-layouts',
+    {admin:true,dashBoard:true,layout:'admin-layouts',
     admins,count:allData[0],
     totalUser:allData[1],
     totalOrder:allData[2],
@@ -113,7 +112,7 @@ router.get('/user',verifyLogin,(req,res,next)=>{
   if(req.session.logged){
      adminHelpers.getAllUser().then((user)=>{
       res.render('admin/user',
-      {admin:true,layout:'admin-layouts',user})
+      {admin:true,layout:'admin-layouts',user,users:true})
           })
   }else{
     res.redirect('/admin/login')
@@ -151,7 +150,7 @@ router.get('/products',verifyLogin,(req,res,next)=>{
   try{
   producthelpers.getAllProducts().then((products)=>{
     res.render('admin/products',
-    {admin:true,layout:'admin-layouts',products})
+    {admin:true,layout:'admin-layouts',products,product:true})
 
   })
 }catch(err){
@@ -200,7 +199,7 @@ router.post('/add-products',verifyLogin,(req,res)=>{
 router.get('/add-category',verifyLogin,(req,res)=>{
   try{
   res.render('admin/add-category',
-  {admin:true,layout:'admin-layouts'})
+  {admin:true,layout:'admin-layouts',category:true})
   }catch(err){
     console.log(err);
   }
@@ -274,7 +273,7 @@ router.get('/delete-product/:id',verifyLogin,(req,res,next)=>{
 router.get('/order-status',verifyLogin,(req,res,next)=>{
 try{
 producthelpers.getOrderDetails().then((orderProduct)=>{
-  res.render('admin/order-status',{admin:true,layout:'admin-layouts',orderProduct})
+  res.render('admin/order-status',{admin:true,layout:'admin-layouts',orderProduct,order:true})
 })
 }catch(err){
   next(err)
@@ -345,7 +344,7 @@ router.get('/category-manage',verifyLogin,(req,res,next)=>{
   try{
   adminHelpers.getAllCategory().then((addCategory)=>{
     adminHelpers.getAllSubcategory().then((subcategory)=>{
-      res.render('admin/category-manage',{admin:true,layout:'admin-layouts',addCategory,subcategory})
+      res.render('admin/category-manage',{admin:true,layout:'admin-layouts',addCategory,subcategory,category:true})
     })
   })
 }catch(err){
@@ -444,7 +443,7 @@ router.get('/banner',verifyLogin,(req,res,next)=>{
   try{
     producthelpers.getBanner().then((banner1)=>{
     console.log(banner1);
-    res.render('admin/banner',{banner1,admin:true,layout:'admin-layouts'})
+    res.render('admin/banner',{banner1,admin:true,layout:'admin-layouts',banner:true})
   })
 }catch(err){
   next(err)

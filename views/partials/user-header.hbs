@@ -1,4 +1,30 @@
-
+<!-- Offcanvas Menu Begin -->
+<div class="offcanvas-menu-overlay"></div>
+<div class="offcanvas-menu-wrapper">
+    <div class="offcanvas__close">+</div>
+    <ul class="offcanvas__widget">
+        <li><span class="icon_search search-switch"></span></li>
+        <li><a href="/user-wishlist"><span class="icon_heart_alt"></span>
+                {{#if users}}
+                <div class="tip">{{wishListCount}}</div>
+                {{/if}}
+            </a></li>
+        <li><a href="/product-cart"><span class="icon_bag_alt"></span>
+                {{#if users}}
+                <div class="tip">{{cartCount}}</div>
+                {{/if}}
+            </a></li>
+    </ul>
+    <div class="offcanvas__logo">
+        <a href="/user-index"><img src="/user/img/logo.png" alt=""></a>
+    </div>
+    <div id="mobile-menu-wrap"></div>
+    <div class="offcanvas__auth">
+        <a href="/login">Login</a>
+        <a href="/signup">Register</a>
+    </div>
+</div>
+<!-- Offcanvas Menu End -->
 
 <!-- Header Section Begin -->
 <header class="header">
@@ -13,56 +39,71 @@
             <div class="col-xl-6 col-lg-7">
                 <nav class="header__menu">
                     <ul>
+                        {{#if home}}
                         <li class="active"><a href="/">Home</a></li>
-                         {{!-- <li><a href="/womens">Women’s</a></li> --}}
-                        
-                        <li><a  href="/shop" >Shop</a></li>
-                         <li><a href="/orders">Orders</a></li> 
 
-                           {{!-- <li><a href="/orders">Orders</a></li>  --}}
+                        {{else}}
+                        <li><a href="/">Home</a></li>
+
+                        {{/if}}
+                        {{#if shop}}
+                        <li class="active"><a href="/shop">Shop</a></li>
+
+                        {{else}}
+                        <li><a href="/shop">Shop</a></li>
+
+                        {{/if}}
+                        {{#if order}}
+                        <li class="active"><a href="/orders">Orders</a></li>
+                        {{else}}
+                         <li ><a href="/orders">Orders</a></li>
+
+                        {{/if}}
+
+                        {{!-- <li><a href="/orders">Orders</a></li> --}}
 
                         {{#if users}}
                         <li><a href="#">Pages</a>
                             <ul class="dropdown">
-                              
+
                                 <li><a href="/product-cart">Cart Items</a></li>
                                 <li><a href="/checkout">Checkout</a></li>
                                 {{!-- <li><a href="/filter">Filter</a></li> --}}
                             </ul>
                         </li>
 
-                       
+
                         {{/if}}
-                       
+
                         <li><a href="#">Contact</a></li>
                         {{!-- login--------------------------------------- --}}
-                      
+
                         {{#if users}}
                         <li><a href="#">Profile</a>
-                        
+
                             <ul class="dropdown">
                                 <li><a href="#">Welcome,{{users.name}}</a></li>
                                 <li><a href="/orders">Order</a></li>
                                 <li><a href="/user-profile">Profile</a></li>
                                 <li><a href="/logout">logout</a></li>
-                               
+
                             </ul>
-                            
+
                         </li>
-                        {{else}}                      
+                        {{else}}
                         <li><a href="#">Account</a>
-                        
+
                             <ul class="dropdown">
                                 <li><a href="/login">Login</a></li>
                                 <li><a href="/signup">Signup</a></li>
-                             
+
                             </ul>
-                            
+
                         </li>
                         {{/if}}
-                   
-                    
-                    
+
+
+
                     </ul>
                 </nav>
             </div>
@@ -77,13 +118,13 @@
 
                         <li><span class="icon_search search-switch"></span></li>
                         {{#if users}}
-                        <li><a id="wishadd"  href="/user-wishlist"><span class="icon_heart_alt"></span>
+                        <li><a id="wishadd" href="/user-wishlist"><span class="icon_heart_alt"></span>
                                 <div class="tip">{{wishListCount}}</div>
                             </a></li>
                         <li><a href="/product-cart" id="cartadd"><span class="icon_bag_alt "></span>
                                 <div class="tip" id="cart-count">{{cartCount}}</div>
                             </a></li>
-                            {{/if}}
+                        {{/if}}
                     </ul>
                 </div>
             </div>
@@ -94,39 +135,39 @@
     </div>
 </header>
 <!-- Header Section End -->
- <script>
-        function filter(type){
-            $.ajax({
-                url:'/filter/'+type,
-                method:'get',
-                success:(response)=>{
-                   location.href='/shop'
-                    // $("#shopdiv").load(location.href + " #shopdiv");
-                     //$("#shopdiv").load(location.href+" #shopdiv>*","");
+<script>
+    function filter(type) {
+        $.ajax({
+            url: '/filter/' + type,
+            method: 'get',
+            success: (response) => {
+                location.href = '/shop'
+                // $("#shopdiv").load(location.href + " #shopdiv");
+                //$("#shopdiv").load(location.href+" #shopdiv>*","");
+
+            }
+
+        })
+    }
+</script>
+<script>
+    function wishList(productId) {
+        $.ajax({
+            url: '/add-wish-list/' + productId,
+            method: 'get',
+            success: (response) => {
+                if (response.logged) {
+                    $('#wishadd').load(location.href + ' #wishadd')
+
+                    alert('added success')
+                    swal('Added successful')
+                } else {
+                    swal('wishlist removed')
+                    $('#wishadd').load(location.href + ' #wishadd')
+
 
                 }
-                
-            })
-        }
-    </script>
-                <script>
-                        function wishList(productId) {
-                            $.ajax({
-                                url: '/add-wish-list/' + productId,
-                                method: 'get',
-                                success: (response) => {
-                                    if (response.logged) {
-                                        $('#wishadd').load(location.href + ' #wishadd')
-
-                                        alert('added success')
-                                        swal('Added successful')
-                                    } else {
-                                        swal('wishlist removed')
-                                        $('#wishadd').load(location.href + ' #wishadd')
-
-
-                                    }
-                                }
-                            })
-                        }
-                    </script>
+            }
+        })
+    }
+</script>

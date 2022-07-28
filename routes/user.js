@@ -40,7 +40,8 @@ try{
       userHelpers.getBannerProducts().then((banner)=>{
         console.log(banner);
         res.render('user/user-index',
-        { user: true, layout: 'user-layouts', users, products, cartCount,wishListCount,banner})
+        { user: true, layout: 'user-layouts', 
+        users, products, cartCount,wishListCount,banner,home:true})
       })
      
 
@@ -187,7 +188,7 @@ router.get('/shop', async (req, res,next) => {
       }
        
         res.render('user/shop',
-        { user: true, products, layout: 'user-layouts', users, cartCount,product,priceF,wishListCount })
+        { user: true, products, layout: 'user-layouts', users, cartCount,product,priceF,wishListCount,shop:true })
               searchProducts=null;
   })
 })
@@ -341,7 +342,7 @@ router.post('/delete-cart',(req,res,next)=>{
 })
 
 // wishlist rendering 
-router.get('/user-wishlist',async(req,res,next)=>{
+router.get('/user-wishlist',verifyLogin,async(req,res,next)=>{
 try{
   let users = req.session.user
   let cartCount = null
@@ -414,7 +415,7 @@ router.get('/user-order',verifyLogin,async(req,res,next)=>{
      wishListCount=await userHelpers.getWishListCount(users._id)
   }
   res.render('user/user-order',
-  {user:true,layout:'user-layouts',users,cartCount,wishListCount})
+  {user:true,layout:'user-layouts',users,cartCount,wishListCount,order:true})
 }catch(err){
   next(err)
 }
