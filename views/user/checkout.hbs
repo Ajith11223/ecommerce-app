@@ -30,48 +30,48 @@
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="checkout__form__input">
                                 <p>First Name <span>*</span></p>
-                                <input type="text" name="name">
+                                <input type="text" name="name" required>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="checkout__form__input">
                                 <p>Last Name <span>*</span></p>
-                                <input type="text" name="name">
+                                <input type="text" name="name" required>
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="checkout__form__input">
                                 <p>Country <span>*</span></p>
-                                <input type="text" name="country">
+                                <input type="text" name="country" required>
                             </div>
                             <div class="checkout__form__input">
                                 <p>Address <span>*</span></p>
-                                <input type="text" placeholder="Street Address" name="adress">
+                                <input type="text" placeholder="Street Address" name="adress" required>
                                 {{!-- <input type="text" placeholder="Apartment. suite, unite ect ( optinal )"> --}}
                             </div>
                             <div class="checkout__form__input">
                                 <p>Town/City <span>*</span></p>
-                                <input type="text" name="city">
+                                <input type="text" name="city" required>
                             </div>
                             <div class="checkout__form__input">
                                 <p>State <span>*</span></p>
-                                <input type="text" name="state">
+                                <input type="text" name="state" required>
                             </div>
                             <div class="checkout__form__input">
                                 <p>Postcode <span>*</span></p>
-                                <input type="text" name="pincode">
+                                <input type="text" name="pincode" required>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="checkout__form__input">
                                 <p>Phone <span>*</span></p>
-                                <input type="number" name="mobile">
+                                <input type="number" name="mobile" required>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div class="checkout__form__input">
                                 <p>Email <span>*</span></p>
-                                <input type="text" name="email">
+                                <input type="text" name="email" required>
                                 <input type="text" name="userId" id="" value="{{users._id}}" hidden>
                             </div>
                         </div>
@@ -80,19 +80,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="checkout__order">
-                        {{!-- <h5>Your order</h5> --}}
-                        {{!-- <div class="checkout__order__product"> --}}
-                            {{!-- <ul> --}}
-                                {{!-- <li> --}}
-                                    {{!-- <span class="top__text">Product</span> --}}
-                                    {{!-- <span class="top__text__right">Total</span> --}}
-                                {{!-- </li> --}}
-                                {{!-- <li> <span>Rs{{total}}</span></li> --}}
-                                {{!-- <li>02. Zip-pockets pebbled<br /> tote briefcase <span>$ 170.0</span></li>
-                                <li>03. Black jean <span>$ 170.0</span></li>
-                                <li>04. Cotton shirt <span>$ 110.0</span></li> --}}
-                            {{!-- </ul> --}}
-                        {{!-- </div> --}}
+                       
                         <div class="checkout__order__total">
                             <ul>
                                 {{!-- <li>Subtotal <span>$ 750.0</span></li> --}}
@@ -100,13 +88,7 @@
                             </ul>
                         </div>
                         <div class="checkout__order__widget">
-                            {{!-- <label for="o-acc">
-                                Create an acount?
-                                <input type="checkbox" id="o-acc">
-                                <span class="checkmark"></span>
-                            </label> --}}
-                            {{!-- <p>Create am acount by entering the information below. If you are a returing customer
-                                login at the top of the page.</p> --}}
+                            
                             <label for="check-payment">
                                 COD
                                 <input type="radio" id="check-payment" name="payment-method" value="COD" required >
@@ -134,7 +116,7 @@
             method: 'post',
             data: $('#checkout-formI').serialize(),
             success: (response) => {
-                //  {{!-- alert(response) --}}
+           
                 if (response.codSuccess) {
                     location.href = ('/user-order')
                 } else {
@@ -145,7 +127,7 @@
         })
     })
     function razorpayPayment(order) {
-        alert(order)
+    
         var options = {
             "key": "rzp_test_JHdlf0ZYNHXef9", // Enter the Key ID generated from the Dashboard
             "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -188,7 +170,7 @@
             method: 'post',
             success:(response)=>{
                 if(response.status){
-                    {{!-- alert('suc') --}}
+                   
                location.href = ('/user-order')
 
                 }else{
@@ -198,3 +180,11 @@
         })
     } 
 </script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js">
+</script>
+<script>
+  $("#checkout-formI").validate();
+</script>
+

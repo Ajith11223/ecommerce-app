@@ -283,7 +283,8 @@ producthelpers.getOrderDetails().then((orderProduct)=>{
 router.get('/change-status/:id',verifyLogin,(req,res,next)=>{
   try{
   let status='deliverd'
-  producthelpers.changeDeliveryStatus(req.params.id,status).then(()=>{
+  let field='deliverd'
+  producthelpers.changeDeliveryStatus(req.params.id,status,field).then(()=>{
     resolve()
     res.redirect('/admin/order-status')
   })
@@ -295,7 +296,9 @@ router.get('/change-status/:id',verifyLogin,(req,res,next)=>{
 router.get('/change-status0/:id',verifyLogin,(req,res,next)=>{
   try{
   let status='shipped'
-  producthelpers.changeDeliveryStatus(req.params.id,status).then(()=>{
+  let field='shipped'
+
+  producthelpers.changeDeliveryStatus(req.params.id,status,field).then(()=>{
     resolve()
     res.redirect('/admin/order-status')
   })
@@ -307,7 +310,9 @@ router.get('/change-status0/:id',verifyLogin,(req,res,next)=>{
 router.get('/change-status1/:id1',verifyLogin,(req,res,next)=>{
   try{
   let status='pending'
-  producthelpers.changeDeliveryStatus(req.params.id1,status).then(()=>{
+  let field='pending'
+
+  producthelpers.changeDeliveryStatus(req.params.id1,status,field).then(()=>{
     resolve()
     res.redirect('/admin/order-status')
   })
@@ -319,6 +324,8 @@ router.get('/change-status1/:id1',verifyLogin,(req,res,next)=>{
 router.get('/change-status2/:id2',verifyLogin,(req,res,next)=>{
   try{
   let status='cancel'
+ 
+
   producthelpers.changeDeliveryStatus(req.params.id2,status).then(()=>{
     resolve()
     res.redirect('/admin/order-status')
@@ -331,7 +338,8 @@ router.get('/change-status2/:id2',verifyLogin,(req,res,next)=>{
 router.get('/change-status3/:id2',verifyLogin,(req,res,next)=>{
   try{
   let status='placed'
-  producthelpers.changeDeliveryStatus(req.params.id2,status).then(()=>{
+  let field='placed'
+  producthelpers.changeDeliveryStatus(req.params.id2,status,field).then(()=>{
     resolve()
     res.redirect('/admin/order-status')
   })
@@ -536,7 +544,66 @@ router.get('/desable-banner/:proId',verifyLogin,(req,res,next)=>{
   next(err)
 }
 })
+// order track deliverd
+router.get('/track0/:id',verifyLogin,(req,res,next)=>{
+  try{
 
+  adminHelpers.changeTrack(req.params.id).then(()=>{
+    resolve()
+    res.redirect('/admin/order-status')
+  })
+}catch(err){
+  next(err)
+}
+})
+// 
+router.get('/track1/:id',verifyLogin,(req,res,next)=>{
+  try{
+
+  adminHelpers.changeTrack1(req.params.id).then(()=>{
+    resolve()
+    res.redirect('/admin/order-status')
+  })
+}catch(err){
+  next(err)
+}
+})
+//
+router.get('/track2/:id',verifyLogin,(req,res,next)=>{
+  try{
+
+  adminHelpers.changeTrack2(req.params.id).then(()=>{
+    resolve()
+    res.redirect('/admin/order-status')
+  })
+}catch(err){
+  next(err)
+}
+})
+//
+router.get('/track3/:id',verifyLogin,(req,res,next)=>{
+  try{
+
+  adminHelpers.changeTrack3(req.params.id).then(()=>{
+    resolve()
+    res.redirect('/admin/order-status')
+  })
+}catch(err){
+  next(err)
+}
+})
+//
+router.get('/track4/:id',verifyLogin,(req,res,next)=>{
+  try{
+
+  adminHelpers.changeTrack4(req.params.id).then(()=>{
+    resolve()
+    res.redirect('/admin/order-status')
+  })
+}catch(err){
+  next(err)
+}
+})
 // error 
 router.get('/*',(req,res)=>{
   res.render('admin/error',{layout:'admin-layouts'})

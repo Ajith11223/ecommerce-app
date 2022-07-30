@@ -188,10 +188,11 @@ getOrderDetails:()=>{
     })
 },
 
-changeDeliveryStatus:(orderId,status)=>{
+changeDeliveryStatus:(orderId,status,field)=>{
     return new Promise((resolve,reject)=>{
         try{
         db.get().collection(collections.ORDER_COLLECTION).updateOne({_id:objectId(orderId)},
+    
         {
            $set:{
 

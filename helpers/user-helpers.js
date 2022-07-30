@@ -2,7 +2,7 @@ const db = require('../config/connection')
 const collections = require('../config/collections')
 const bcrypt = require('bcrypt');
 const { reject, resolve } = require('promise');
-const { result, truncate, toLower, method } = require('lodash');
+const { result, truncate, toLower, method, sum } = require('lodash');
 const async = require('hbs/lib/async');
 const path = require('../app');
 const { ObjectId } = require('mongodb');
@@ -218,6 +218,79 @@ module.exports = {
         })
 
     },
+    // single product total amount
+    getProductTotalSingle: (userId) => {
+        return new Promise(async (resolve, reject) => {
+            try{
+          let sumt= await db.get().collection(collections.CART_COLLECTION).aggregate([
+                {
+                    $match: { user: ObjectId(userId) }
+                },
+                // {
+                //     $unwind: '$products'
+                // },
+                // {
+                //     $project: {
+                //         item: '$products.item',
+                //         quantity: '$products.quantity'
+                //     }
+                // },
+                // {
+                //     $lookup: {
+                //         from: collections.PRODUCT_COLLECTION,
+                //         localField: 'item',
+                //         foreignField: '_id',
+                //         as: 'products'
+                //     }
+                // },
+                // {
+                //     $project: {
+                //         item: 1, quantity: 1, products: { $arrayElemAt: ['$products', 0] }
+                //     }
+                // },
+                
+                    {
+                      '$unwind': {
+                        'path': '$products'
+                      }
+                    }, {
+                      '$lookup': {
+                        'from': 'product', 
+                        'localField': 'products.item', 
+                        'foreignField': '_id', 
+                        'as': 'lookupProducts'
+                      }
+                    }, {
+                      '$unwind': {
+                        'path': '$lookupProducts'
+                      }
+                    }, 
+                  
+
+
+
+
+
+
+
+
+
+                {
+                    $project: {
+                        _id:0,
+                        sum: { $sum: { $multiply: ['$products.quantity', '$lookupProducts.price'] } }
+                    }
+                }
+
+            ]).toArray()
+            console.log(sumt);
+                resolve(sumt)
+      
+        }catch(err){
+            reject(err)
+        }
+        })
+    },
     // total amount
     getTotalAmount: (userId) => {
         return new Promise(async (resolve, reject) => {
@@ -421,6 +494,10 @@ module.exports = {
                 },
                 userId: ObjectId(order.userId),
                 paymentMethod: order['payment-method'],
+                pending:true,
+                placed:false,
+                shipped:false,
+                deliverd:false,
                 status: orderStatus,
                 deliveryStatus: 'pending',
                 products: products

@@ -25,7 +25,7 @@
                                 <th>Product</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
-                                {{!-- <th>Total</th> --}}
+                                <th>Total</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -56,7 +56,7 @@
                                 {{!-- {{/each}} --}}
 
 
-                                <td class="cart__price">$ {{this.products.price}}</td>
+                                <td class="cart__price">Rs {{this.products.price}}</td>
 
                                 <td class="cart__quantity">
 
@@ -67,7 +67,9 @@
                                         onclick="changeQuantity('{{this._id}}','{{this.products._id}}','{{../users._id}}','{{this.products.stock}}',1)">+</button>
 
                                 </td>
-                                {{!-- <td class="cart__total">{{total}}</td> --}}
+                                 {{#each superateTotal}} 
+                                 <td class="cart__total">{{../superateTotal.[0].sum}}</td>
+                                  {{/each}} 
                                 <td class="cart__close"><button
                                         onclick="deleteCart('{{this._id}}','{{this.products._id}}')">Remove</button></span>
                                 </td>

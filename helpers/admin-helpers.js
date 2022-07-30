@@ -328,6 +328,91 @@ module.exports = {
             resolve(total)
 
         })
+    },
+     changeTrack: (orderId) => {
+        return new Promise((resolve, reject) => {
+            try{
+            db.get().collection(collections.ORDER_COLLECTION).updateOne({ _id: ObjectId(orderId) }, {
+                $set: {
+                  pending:false,
+                  placed:false,
+                  shipped:false,
+                  deliverd:true,
+                }
+            }).then(() => {
+                resolve()
+            })}catch(err){
+                reject(err)
+            }
+        })
+    },
+    changeTrack1: (orderId) => {
+        return new Promise((resolve, reject) => {
+            try{
+            db.get().collection(collections.ORDER_COLLECTION).updateOne({ _id: ObjectId(orderId) }, {
+                $set: {
+                  pending:false,
+                  placed:false,
+                  shipped:true,
+                  deliverd:false,
+                }
+            }).then(() => {
+                resolve()
+            })}catch(err){
+                reject(err)
+            }
+        })
+    },
+    changeTrack2: (orderId) => {
+        return new Promise((resolve, reject) => {
+            try{
+            db.get().collection(collections.ORDER_COLLECTION).updateOne({ _id: ObjectId(orderId) }, {
+                $set: {
+                  pending:true,
+                  placed:false,
+                  shipped:false,
+                  deliverd:false,
+                }
+            }).then(() => {
+                resolve()
+            })}catch(err){
+                reject(err)
+            }
+        })
+    },
+    changeTrack3: (orderId) => {
+        return new Promise((resolve, reject) => {
+            try{
+            db.get().collection(collections.ORDER_COLLECTION).updateOne({ _id: ObjectId(orderId) }, {
+                $set: {
+                  pending:false,
+                  placed:true,
+                  shipped:false,
+                  deliverd:false,
+                }
+            }).then(() => {
+                resolve()
+            })}catch(err){
+                reject(err)
+            }
+        })
+    },
+    changeTrack4: (orderId) => {
+        return new Promise((resolve, reject) => {
+            try{
+            db.get().collection(collections.ORDER_COLLECTION).updateOne({ _id: ObjectId(orderId) }, {
+                $set: {
+                  pending:false,
+                  placed:false,
+                  shipped:false,
+                  deliverd:false,
+                }
+            }).then(() => {
+                resolve()
+            })}catch(err){
+                reject(err)
+            }
+        })
     }
 
 }

@@ -10,7 +10,8 @@ const collections = require('../config/collections');
 const productHelpers = require('../helpers/product-helpers');
 const router = express.Router();
 const userHelpers = require('../helpers/user-helpers')
-const twilioHelpers = require('../helpers/twilio-helpers')
+const twilioHelpers = require('../helpers/twilio-helpers');
+const { getProductTotalSingle } = require('../helpers/user-helpers');
 
 
 let searchProducts;
@@ -210,6 +211,7 @@ router.get('/product-cart', verifyLogin, async (req, res,next) => {
   let cartCount = null
   let wishListCount=null
   let total=0
+  let  superateTotal=0
  
 
   if (req.session.user) {
@@ -218,12 +220,24 @@ router.get('/product-cart', verifyLogin, async (req, res,next) => {
 
   }
   let products = await userHelpers.getCartProduct(userId)
+  superateTotal=await userHelpers.getProductTotalSingle(users._id)
+   
+
+  
+
+console.log(superateTotal);
+  console.log(products);
   if(products.length>0){
+   
     total = await userHelpers.getTotalAmount(users._id)
   }
   if(cartCount > 0){
-    res.render('user/product-cart',
-    { user: true, layout: 'user-layouts', users, products, cartCount, total,wishListCount})
+  
+      res.render('user/product-cart',
+      { user: true, layout: 'user-layouts', users, products, cartCount, total,wishListCount,superateTotal})
+    
+  
+   
   }else{
     res.redirect('/empty')
   }
@@ -291,6 +305,7 @@ router.get('/checkout', verifyLogin, async (req, res,next) => {
 
   }
   let total = await userHelpers.getTotalAmount(users._id)
+
   res.render('user/checkout', 
   { user:true,layout: 'user-layouts', users, cartCount, total,wishListCount })
 }catch(err){
@@ -427,7 +442,9 @@ router.get('/orders',verifyLogin,async(req,res,next)=>{
   let cartCount = null
   let wishListCount=null
   let orderCount=null
-  
+  let  product=await userHelpers.orderProduct(users._id)
+  let orderId=product[0]._id
+  let orderProducts=await userHelpers.getOrderProduct(orderId)
   if (req.session.user) {
     cartCount = await userHelpers.getCartCount(users._id)
      wishListCount=await userHelpers.getWishListCount(users._id)
@@ -437,7 +454,7 @@ router.get('/orders',verifyLogin,async(req,res,next)=>{
   let  products=await userHelpers.orderProduct(users._id)
   if(orderCount > 0){
     res.render('user/orders',
-    {user:true,layout:'user-layouts',users,cartCount,wishListCount,products})
+    {user:true,layout:'user-layouts',users,cartCount,wishListCount,products,product,orderProducts})
   }else{
     res.redirect('/emptyOrder')
   }
@@ -648,8 +665,10 @@ router.get('/emptyOrder',async(req,res)=>{
 
   res.render('user/emptyOrder',{user:true,layout:'user-layouts',users,cartCount,wishListCount})
 })
-
-
+// contact page render
+router.get('/contact',(req,res)=>{
+  res.render('user/contact',{user:true,layout:'user-layouts'})
+})
 
 
 
