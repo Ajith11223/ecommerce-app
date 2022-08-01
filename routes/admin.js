@@ -604,6 +604,13 @@ router.get('/track4/:id',verifyLogin,(req,res,next)=>{
   next(err)
 }
 })
+// feedback
+router.get('/feedback',(req,res)=>{
+  adminHelpers.allFeedback().then((review)=>{
+    res.render('admin/feedback',{admin:true,layout:'admin-layouts',feedback:true,review})
+
+  })
+})
 // error 
 router.get('/*',(req,res)=>{
   res.render('admin/error',{layout:'admin-layouts'})

@@ -413,6 +413,15 @@ module.exports = {
                 reject(err)
             }
         })
+    },
+    // get all review date wise
+    allFeedback:()=>{
+        return new Promise(async(resolve,reject)=>{
+      let review= await db.get().collection(collections.REVIEW_COLLECTION).find().sort({date:-1}).toArray()
+                console.log(review);
+                resolve(review)
+            
+        })
     }
 
 }

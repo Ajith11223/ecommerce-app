@@ -1,0 +1,60 @@
+
+
+<section class="p-9" >
+    <div>
+               <h1 class="mt-1">Feedback</h1>
+
+    </div>
+    <div class="row mt-4">
+
+    </div>
+    <div class="container">
+
+        <table class="table mt-5 " id="productsTable">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">User Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Website</th>
+       <th scope="col">Feedback</th>
+
+    </tr>
+  </thead>
+  <tbody>
+      {{#each review}}
+    <tr>
+      <th scope="row">{{inc @index}}</th>
+      
+      <td>{{this.name}}</td>
+      <td>{{this.email}}</td>
+      <td>{{this.website}}</td>
+      <td>{{this.feedback}}</td>
+     <td>
+
+     </td>
+    </tr>
+    {{/each}}
+   
+  </tbody>
+</table>
+    </div>
+
+
+</section>
+<script>
+
+  $(document).ready(function () {
+
+
+    $('#productsTable').wrap('<div id="hide" style="display:none"/>');
+
+    $('#hide').css('display', 'block');
+  });
+
+
+  var table = $('#productsTable').DataTable();
+
+
+</script>
+

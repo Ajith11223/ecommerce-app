@@ -1,0 +1,57 @@
+{{!-- <section class="p-9 ">
+   <div class="container mt-4">
+      <div class="row">
+         <div class="col-md-6">
+            <h2 class="text-center"> Add Product</h2>
+            <form action="/otp" method="post" enctype="multipart/form-data">
+               <label for="">otp</label>
+               <input type="number" name="otp" class="form-control">
+
+               <button type="submit" class="btn btn-primary mt-4">Submit</button>
+
+            </form>
+
+         </div>
+      </div>
+   </div>
+</section>
+
+ --}}
+<section class="vh-100 bg-image"
+  style="background-image: url('/images/loginbac.webp');">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-left align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5  ">
+              <h2 class="text-uppercase text-center mb-5"><b> Your Mobile Number</b></h2>
+           
+               <form action="/user-mobile" method="post" class="text-center" enctype="multipart/form-data">
+               <label for="" ><b> Your Number</b></label><br>
+               <input type="number" name="phone" value="{{number.phone}}" class="form " readonly><br>
+
+               <button type="submit" class="btn btn-primary mt-4 ">Submit</button>
+
+            </form>
+            
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+</section>
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+  </script>
+<script
+  type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js">
+  </script>
+<script>
+  $("#login").validate();
+</script>

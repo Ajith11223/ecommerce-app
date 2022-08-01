@@ -84,7 +84,6 @@ router.post('/signup', (req, res,next) => {
     
 
     userHelpers.checkUnique(req.body).then((response) => {
-      console.log(response);
       if (response.count) {
         req.session.signup = "Already registered,please login"
         res.redirect('/signup')
@@ -115,11 +114,11 @@ try{
 
     if(response.valid){
         userHelpers.doSignup(req.session.body).then((response)=>{
-          console.log(response);
+        
           res.redirect('/login')
         })
     }else{
-      console.log(req.body)
+     
       res.redirect('/otp')
     }
   })
@@ -666,12 +665,107 @@ router.get('/emptyOrder',async(req,res)=>{
   res.render('user/emptyOrder',{user:true,layout:'user-layouts',users,cartCount,wishListCount})
 })
 // contact page render
-router.get('/contact',(req,res)=>{
-  res.render('user/contact',{user:true,layout:'user-layouts'})
+router.get('/contact',verifyLogin,async(req,res)=>{
+  let users = req.session.user
+  const userId = req.session.user._id
+  let cartCount = null
+  let wishListCount=null
+
+  if (req.session.user) {
+    cartCount = await userHelpers.getCartCount(users._id)
+    wishListCount=await userHelpers.getWishListCount(users._id)
+  }
+  res.render('user/contact',{user:true,layout:'user-layouts',cartCount,wishListCount,users})
+})
+// email check forgot 
+router.get('/user-email',(req,res)=>{
+  res.render('user/user-email',{layout:'user-layouts'})
+})
+//user mobile otp
+router.get('/user-mobile',(req,res)=>{
+  userHelpers.mobileFind(req.session.email).then((number)=>{
+    res.render('user/user-mobile',{layout:'user-layouts',number})
+
+  })
+})
+// post data email
+router.post('/user-email',(req,res)=>{
+    req.session.email=req.body
+  userHelpers.checkAlready(req.body).then((response)=>{
+    if (response.count) {
+      res.redirect('/user-mobile')
+      
+    }else{
+      req.session.signup='Email not registerd'
+      res.redirect('/signup')
+    }
+
+  })
+})
+// user-otp rendering
+router.get('/user-otp',(req,res)=>{
+  res.render('user/user-otp',{layout:'user-layouts'})
 })
 
+//user mobile post 
+router.post('/user-mobile',(req,res)=>{
+  req.session.phone=req.body
+  userHelpers.checkAlreadyMobile(req.body).then((response)=>{
+    if (response.count) {
+      twilioHelpers.doSms(req.body).then((data)=>{
+     if(data){
+      res.redirect('/user-otp')
+     }else{
+      req.session.signup='number not match please signup'
+      res.redirect('/signup')
+     }
+      })
+      
+    }else{
+      req.session.signup="Number not valid,please sign up"
+      res.redirect('/signup')
+    }
 
+  })
+})
+//new password render
+router.get('/rest-password',(req,res)=>{
+  res.render('user/rest-password',{layout:'user-layouts'})
+})
+//post otp
+router.post('/user-otp',(req,res,next)=>{
+  try{
+    twilioHelpers.otpVerify(req.body,req.session.phone).then((response)=>{
+  
+      if(response.valid){          
+            res.redirect('/rest-password')
+          
+      }else{
+       req.session.signup='not valid ,please signup'
+        res.redirect('/signup')
+      }
+    })
+  }catch(err){
+    next(err)
+  }
+  })
+//new password post
+router.post('/rest-password',(req,res)=>{
+  console.log(req.body);
+  userHelpers.doPasswordUpdate(req.body,req.session.email).then((response)=>{
+    res.redirect('/login')
+  })
+})
+// user feedback
+router.post('/feedback',(req,res)=>{
+  console.log(req.body);
+  userHelpers.submitReview(req.body).then((response)=>{
+ 
+    res.redirect('/contact')
+   
 
+  })
+})
 
 
 

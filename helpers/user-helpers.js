@@ -767,6 +767,78 @@ module.exports = {
         }
         })
   
-    }
+    },
+    //check unique
+    checkAlready: (userData) => {
 
+        let valid = {}
+        return new Promise(async (resolve, reject) => {
+            try {
+                let count = await db.get().collection(collections.USER_COLLECTION).
+                    findOne({ email: userData.email })
+                if (count) {
+                    valid.count = true
+                    console.log(valid)
+                    resolve(valid)
+                } else {
+                    resolve(valid)
+                }
+            } catch (error) {
+                reject(error)
+            }
+        })
+    },
+    //number check unique
+    checkAlreadyMobile:(userData) => {
+
+        let valid = {}
+        return new Promise(async (resolve, reject) => {
+            try {
+                let count = await db.get().collection(collections.USER_COLLECTION).
+                    findOne({ phone: userData.phone })
+                if (count) {
+                    valid.count = true
+                    console.log(valid)
+                    resolve(valid)
+                } else {
+                    resolve(valid)
+                }
+            } catch (error) {
+                reject(error)
+            }
+        })
+    },
+    //password update
+    doPasswordUpdate:(pass,userMail)=>{
+       
+        return new Promise(async(resolve,reject)=>{
+            pass.password=await bcrypt.hash(pass.password,10)
+            db.get().collection(collections.USER_COLLECTION).updateOne({email:userMail.email},
+                {
+                    $set:{
+                      password:pass.password
+                    }
+                }
+                ).then((response)=>{
+                    resolve(response)
+                })
+        })
+    },
+    //find mobile number
+    mobileFind:(data)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collections.USER_COLLECTION).findOne({email:data.email}).then((number)=>{
+                resolve(number)
+            })
+        })
+    },
+    // feedback insert
+    submitReview:(data)=>{
+        return new Promise((resolve,reject)=>{
+            data.date=Date()
+            db.get().collection(collections.REVIEW_COLLECTION).insertOne(data).then((response)=>{
+                resolve(response)
+            })
+        })
+    }
 }

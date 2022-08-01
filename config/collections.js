@@ -10,7 +10,8 @@ module.exports={
     PROFILE_COLLECTION:'profile',
     ADDCATEGORY_COLLECTION:'addcategory',
     SUBCATEGORY_COLLECTION:'subcategory',
-    BANNER_COLLECTION:'banner'
+    BANNER_COLLECTION:'banner',
+    REVIEW_COLLECTION:'review'
 
 
 
