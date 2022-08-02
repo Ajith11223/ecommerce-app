@@ -80,7 +80,6 @@ router.get('/login',(req,res,next)=>{
   {layout:'admin-layouts',loginError:req.session.loginError})
   req.session.loginError=false;
 }catch(err){
-  console.log(err);
   next(err)
 }
 });
@@ -419,7 +418,6 @@ router.get('/delete-categoryadd/:CID',verifyLogin,(req,res,next)=>{
 router.get('/edit-subcategory/:SUBID',verifyLogin,(req,res,next)=>{
 try{
   adminHelpers.getSubCategoryOne(req.params.SUBID).then((subcategory)=>{
-    console.log(subcategory);
     res.render('admin/edit-subcategory',{admin:true,layout:'admin-layouts',subcategory})
   })
 }catch(err){
@@ -450,7 +448,6 @@ router.get('/delete-subcategory/:DID',verifyLogin,(req,res,next)=>{
 router.get('/banner',verifyLogin,(req,res,next)=>{
   try{
     producthelpers.getBanner().then((banner1)=>{
-    console.log(banner1);
     res.render('admin/banner',{banner1,admin:true,layout:'admin-layouts',banner:true})
   })
 }catch(err){

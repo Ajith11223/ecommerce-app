@@ -12,7 +12,7 @@
 		      <th scope="col">PRICE</th>
 		      <th scope="col">CATEGORY</th>
 		      {{!-- <th scope="col">SUBCATEGORY</th> --}}
-		      <th scope="col">STATUS</th>
+		      {{!-- <th scope="col">STATUS</th> --}}
 		      <th scope="col">OPTION</th>
 
 		    </tr>
@@ -29,13 +29,16 @@
 		      <td>{{this.products.price}}</td>
     	      <td>{{this.products.category}}</td>
 		      {{!-- <td>{{this.products.subCategory}}</td> --}}
-			 <td>{{this.status}}</td> 
+			 {{!-- <td>{{this.status}}</td>  --}}
 
               <td>
                 <a href="/" class="btn btn-primary mb-3" >Back to Home</a><br>
 				{{#if notActive}}
                 <a href="/orders" class="btn btn-success mb-3">Back to Order</a><br>
 		    	{{else}}
+				{{!-- {{#if products.deliverd}}
+					<a href="/invoice/{{this._id}}/{{this.item}}"   class="btn btn-success mb-3">Download inv</a><br>
+                {{/if}} --}}
 				<a href="" onclick="cancel('{{this._id}}','{{this.item}}')"  class="btn btn-danger ">Cancel Order</a>
                {{/if}}
 

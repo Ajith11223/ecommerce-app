@@ -8,42 +8,42 @@ const { response } = require('express');
 
 module.exports = {
     adminLogin: (adminData) => {
-     return new Promise(async (resolve, reject) => {
-            try{
-            let response = {}
-            let admin = await db.get().collection(collections.ADMIN_COLLECTION).findOne({ email: adminData.email })
-            if (admin) {
-                bcrypt.compare(adminData.password, admin.password).then((adminStatus) => {
-                    if (adminStatus) {
-                        console.log("admin login success");
-                        response.admin = admin
-                        response.adminStatus = true
-                        resolve(response)
-                    } else {
-                        console.log("admin login failed");
-                        resolve({ adminStatus: false })
-                    }
+        return new Promise(async (resolve, reject) => {
+            try {
+                let response = {}
+                let admin = await db.get().collection(collections.ADMIN_COLLECTION).findOne({ email: adminData.email })
+                if (admin) {
+                    bcrypt.compare(adminData.password, admin.password).then((adminStatus) => {
+                        if (adminStatus) {
+                            console.log("admin login success");
+                            response.admin = admin
+                            response.adminStatus = true
+                            resolve(response)
+                        } else {
+                            console.log("admin login failed");
+                            resolve({ adminStatus: false })
+                        }
 
-                })
-            } else {
-                console.log("admin user failed");
-                resolve({ adminStatus: false })
-            }
-        }catch(err){
+                    })
+                } else {
+                    console.log("admin user failed");
+                    resolve({ adminStatus: false })
+                }
+            } catch (err) {
                 reject(err)
             }
 
         })
-    
+
     },
 
     //user list get
     getAllUser: () => {
         return new Promise(async (resolve, reject) => {
-            try{
-            let user = await db.get().collection(collections.USER_COLLECTION).find().toArray()
-            resolve(user)
-            }catch(err){
+            try {
+                let user = await db.get().collection(collections.USER_COLLECTION).find().toArray()
+                resolve(user)
+            } catch (err) {
                 reject(err)
             }
         })
@@ -51,31 +51,32 @@ module.exports = {
     //block user
     blockUser: (userId) => {
         return new Promise((resolve, reject) => {
-            try{
-            db.get().collection(collections.USER_COLLECTION).updateOne({ _id: ObjectId(userId) }, {
-                $set: {
-                    blockUser: true
-                }
-            }).then(() => {
-                resolve()
-            })
-        }catch(err){
-            reject(err)
-        }
+            try {
+                db.get().collection(collections.USER_COLLECTION).updateOne({ _id: ObjectId(userId) }, {
+                    $set: {
+                        blockUser: true
+                    }
+                }).then(() => {
+                    resolve()
+                })
+            } catch (err) {
+                reject(err)
+            }
         })
 
     },
     //unblock user
     unblockUser: (userId) => {
         return new Promise((resolve, reject) => {
-            try{
-            db.get().collection(collections.USER_COLLECTION).updateOne({ _id: ObjectId(userId) }, {
-                $set: {
-                    blockUser: false
-                }
-            }).then(() => {
-                resolve()
-            })}catch(err){
+            try {
+                db.get().collection(collections.USER_COLLECTION).updateOne({ _id: ObjectId(userId) }, {
+                    $set: {
+                        blockUser: false
+                    }
+                }).then(() => {
+                    resolve()
+                })
+            } catch (err) {
                 reject(err)
             }
         })
@@ -93,10 +94,10 @@ module.exports = {
     // get all category 
     getAllCategory: () => {
         return new Promise(async (resolve, reject) => {
-            try{
-            const addCategory = await db.get().collection(collections.ADDCATEGORY_COLLECTION).find().toArray()
-            resolve(addCategory)
-            }catch(err){
+            try {
+                const addCategory = await db.get().collection(collections.ADDCATEGORY_COLLECTION).find().toArray()
+                resolve(addCategory)
+            } catch (err) {
                 reject(err)
             }
         })
@@ -104,13 +105,13 @@ module.exports = {
     // add sub actegory
     addSubCategory: (subData) => {
         return new Promise((resolve, reject) => {
-            try{
-            db.get().collection(collections.SUBCATEGORY_COLLECTION).insertOne(subData).then((response) => {
-                resolve()
-            })
-        }catch(err){
-            reject(err)
-        }
+            try {
+                db.get().collection(collections.SUBCATEGORY_COLLECTION).insertOne(subData).then((response) => {
+                    resolve()
+                })
+            } catch (err) {
+                reject(err)
+            }
         })
     },
     // get all sub category
@@ -123,114 +124,114 @@ module.exports = {
     // find single category
     getCategory: (catId) => {
         return new Promise((resolve, reject) => {
-            try{
-            db.get().collection(collections.ADDCATEGORY_COLLECTION).findOne({ _id: ObjectId(catId) }).then((ecategory) => {
-                resolve(ecategory)
-            })
-        }catch(err){
-            reject(err)
-        }
+            try {
+                db.get().collection(collections.ADDCATEGORY_COLLECTION).findOne({ _id: ObjectId(catId) }).then((ecategory) => {
+                    resolve(ecategory)
+                })
+            } catch (err) {
+                reject(err)
+            }
         })
     },
     // edit category add
     addCategory: (cateData, cateId) => {
         return new Promise((resolve, reject) => {
-            try{
-            db.get().collection(collections.ADDCATEGORY_COLLECTION).updateOne({ _id: ObjectId(cateId) },
-                {
-                    $set: {
-                        name: cateData.name
+            try {
+                db.get().collection(collections.ADDCATEGORY_COLLECTION).updateOne({ _id: ObjectId(cateId) },
+                    {
+                        $set: {
+                            name: cateData.name
+                        }
                     }
-                }
-            ).then((responce) => {
-                resolve(responce)
-            })
-        }catch(err){
-            reject(err)
-        }
+                ).then((responce) => {
+                    resolve(responce)
+                })
+            } catch (err) {
+                reject(err)
+            }
         })
     },
     // delete category
     deleteCategoryAdd: (cateId) => {
         return new Promise((resolve, reject) => {
-            try{
-            db.get().collection(collections.ADDCATEGORY_COLLECTION).deleteOne({ _id: ObjectId(cateId) }).then(() => {
-                resolve()
-            })
-        }catch(err){
-            reject(err)
-        }
+            try {
+                db.get().collection(collections.ADDCATEGORY_COLLECTION).deleteOne({ _id: ObjectId(cateId) }).then(() => {
+                    resolve()
+                })
+            } catch (err) {
+                reject(err)
+            }
         })
     },
     // find one subcategory
     getSubCategoryOne: (SubId) => {
         return new Promise((resolve, reject) => {
-            try{
-            db.get().collection(collections.SUBCATEGORY_COLLECTION).findOne({ _id: ObjectId(SubId) }).then((subcategory) => {
-                resolve(subcategory)
-            })
-        }catch(err){
-            reject(err)
-        }
+            try {
+                db.get().collection(collections.SUBCATEGORY_COLLECTION).findOne({ _id: ObjectId(SubId) }).then((subcategory) => {
+                    resolve(subcategory)
+                })
+            } catch (err) {
+                reject(err)
+            }
         })
     },
     // edit sub category add
     updateSubCategory: (subCateData, subCateId) => {
         return new Promise((resolve, reject) => {
-            try{
-            db.get().collection(collections.SUBCATEGORY_COLLECTION).updateOne({ _id: ObjectId(subCateId) },
-                {
-                    $set: {
-                        name: subCateData.name
+            try {
+                db.get().collection(collections.SUBCATEGORY_COLLECTION).updateOne({ _id: ObjectId(subCateId) },
+                    {
+                        $set: {
+                            name: subCateData.name
+                        }
                     }
-                }
-            ).then((responce) => {
-                resolve(responce)
-            })
-        }catch(err){
-            reject(err)
-        }
+                ).then((responce) => {
+                    resolve(responce)
+                })
+            } catch (err) {
+                reject(err)
+            }
         })
     },
     // delete sub category
     deleteSubCategory: (subCAtId) => {
         return new Promise((resolve, reject) => {
-            try{
-            db.get().collection(collections.SUBCATEGORY_COLLECTION).deleteOne({ _id: ObjectId(subCAtId) }).then(() => {
-                resolve()
-            })
-        }catch(err){
-            reject(err)
-        }
+            try {
+                db.get().collection(collections.SUBCATEGORY_COLLECTION).deleteOne({ _id: ObjectId(subCAtId) }).then(() => {
+                    resolve()
+                })
+            } catch (err) {
+                reject(err)
+            }
         })
     },
     // gett banner products
     getBanner: (proId) => {
         return new Promise(async (resolve, reject) => {
-            try{
-            await db.get().collection(collections.BANNER_COLLECTION).findOne({ _id: ObjectId(proId) }).then((products) => {
-                resolve(products)
+            try {
+                await db.get().collection(collections.BANNER_COLLECTION).findOne({ _id: ObjectId(proId) }).then((products) => {
+                    resolve(products)
 
-            })
-        }catch(err){
-            reject(err)
-        }
+                })
+            } catch (err) {
+                reject(err)
+            }
         })
     },
     // edit banner 
     editBanner: (data, proId) => {
         return new Promise((resolve, reject) => {
-            try{
-            db.get().collection(collections.BANNER_COLLECTION).updateOne({ _id: ObjectId(proId) },
-                {
-                    $set: {
-                        name: data.name,
-                        status: data.status
-                    }
-                }).then((response) => {
-                    resolve(response)
-                })
-            }catch(err){
+            try {
+                db.get().collection(collections.BANNER_COLLECTION).updateOne({ _id: ObjectId(proId) },
+                    {
+                        $set: {
+                            name: data.name,
+                            status: data.status
+                        }
+                    }).then((response) => {
+                        resolve(response)
+                    })
+            } catch (err) {
                 reject(err)
             }
         })
@@ -238,28 +239,28 @@ module.exports = {
     // delete banner
     deleteBanner: (proId) => {
         return new Promise((resolve, reject) => {
-            try{
-            db.get().collection(collections.BANNER_COLLECTION).deleteOne({ _id: ObjectId(proId) }).then((response) => {
-                resolve()
-            })
-        }catch(err){
-            reject(err)
-        }
+            try {
+                db.get().collection(collections.BANNER_COLLECTION).deleteOne({ _id: ObjectId(proId) }).then((response) => {
+                    resolve()
+                })
+            } catch (err) {
+                reject(err)
+            }
         })
     },
     // banner enble
     enableBanner: (proId, data) => {
         return new Promise((resolve, reject) => {
-            try{
-            db.get().collection(collections.BANNER_COLLECTION).updateOne({ _id: ObjectId(proId) },
-                {
-                    $set: {
-                        status: data
-                    }
-                }).then((response) => {
-                    resolve(response)
-                })
-            }catch(err){
+            try {
+                db.get().collection(collections.BANNER_COLLECTION).updateOne({ _id: ObjectId(proId) },
+                    {
+                        $set: {
+                            status: data
+                        }
+                    }).then((response) => {
+                        resolve(response)
+                    })
+            } catch (err) {
                 reject(err)
             }
         })
@@ -329,98 +330,102 @@ module.exports = {
 
         })
     },
-     changeTrack: (orderId) => {
+    changeTrack: (orderId) => {
         return new Promise((resolve, reject) => {
-            try{
-            db.get().collection(collections.ORDER_COLLECTION).updateOne({ _id: ObjectId(orderId) }, {
-                $set: {
-                  pending:false,
-                  placed:false,
-                  shipped:false,
-                  deliverd:true,
-                }
-            }).then(() => {
-                resolve()
-            })}catch(err){
+            try {
+                db.get().collection(collections.ORDER_COLLECTION).updateOne({ _id: ObjectId(orderId) }, {
+                    $set: {
+                        pending: false,
+                        placed: false,
+                        shipped: false,
+                        deliverd: true,
+                    }
+                }).then(() => {
+                    resolve()
+                })
+            } catch (err) {
                 reject(err)
             }
         })
     },
     changeTrack1: (orderId) => {
         return new Promise((resolve, reject) => {
-            try{
-            db.get().collection(collections.ORDER_COLLECTION).updateOne({ _id: ObjectId(orderId) }, {
-                $set: {
-                  pending:false,
-                  placed:false,
-                  shipped:true,
-                  deliverd:false,
-                }
-            }).then(() => {
-                resolve()
-            })}catch(err){
+            try {
+                db.get().collection(collections.ORDER_COLLECTION).updateOne({ _id: ObjectId(orderId) }, {
+                    $set: {
+                        pending: false,
+                        placed: false,
+                        shipped: true,
+                        deliverd: false,
+                    }
+                }).then(() => {
+                    resolve()
+                })
+            } catch (err) {
                 reject(err)
             }
         })
     },
     changeTrack2: (orderId) => {
         return new Promise((resolve, reject) => {
-            try{
-            db.get().collection(collections.ORDER_COLLECTION).updateOne({ _id: ObjectId(orderId) }, {
-                $set: {
-                  pending:true,
-                  placed:false,
-                  shipped:false,
-                  deliverd:false,
-                }
-            }).then(() => {
-                resolve()
-            })}catch(err){
+            try {
+                db.get().collection(collections.ORDER_COLLECTION).updateOne({ _id: ObjectId(orderId) }, {
+                    $set: {
+                        pending: true,
+                        placed: false,
+                        shipped: false,
+                        deliverd: false,
+                    }
+                }).then(() => {
+                    resolve()
+                })
+            } catch (err) {
                 reject(err)
             }
         })
     },
     changeTrack3: (orderId) => {
         return new Promise((resolve, reject) => {
-            try{
-            db.get().collection(collections.ORDER_COLLECTION).updateOne({ _id: ObjectId(orderId) }, {
-                $set: {
-                  pending:false,
-                  placed:true,
-                  shipped:false,
-                  deliverd:false,
-                }
-            }).then(() => {
-                resolve()
-            })}catch(err){
+            try {
+                db.get().collection(collections.ORDER_COLLECTION).updateOne({ _id: ObjectId(orderId) }, {
+                    $set: {
+                        pending: false,
+                        placed: true,
+                        shipped: false,
+                        deliverd: false,
+                    }
+                }).then(() => {
+                    resolve()
+                })
+            } catch (err) {
                 reject(err)
             }
         })
     },
     changeTrack4: (orderId) => {
         return new Promise((resolve, reject) => {
-            try{
-            db.get().collection(collections.ORDER_COLLECTION).updateOne({ _id: ObjectId(orderId) }, {
-                $set: {
-                  pending:false,
-                  placed:false,
-                  shipped:false,
-                  deliverd:false,
-                }
-            }).then(() => {
-                resolve()
-            })}catch(err){
+            try {
+                db.get().collection(collections.ORDER_COLLECTION).updateOne({ _id: ObjectId(orderId) }, {
+                    $set: {
+                        pending: false,
+                        placed: false,
+                        shipped: false,
+                        deliverd: false,
+                    }
+                }).then(() => {
+                    resolve()
+                })
+            } catch (err) {
                 reject(err)
             }
         })
     },
     // get all review date wise
-    allFeedback:()=>{
-        return new Promise(async(resolve,reject)=>{
-      let review= await db.get().collection(collections.REVIEW_COLLECTION).find().sort({date:-1}).toArray()
-                console.log(review);
-                resolve(review)
-            
+    allFeedback: () => {
+        return new Promise(async (resolve, reject) => {
+            let review = await db.get().collection(collections.REVIEW_COLLECTION).find().sort({ date: -1 }).toArray()
+            resolve(review)
+
         })
     }
 

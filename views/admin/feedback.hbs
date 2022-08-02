@@ -10,7 +10,7 @@
     </div>
     <div class="container">
 
-        <table class="table mt-5 " id="productsTable">
+        <table class="table mt-5 " id="userTable">
   <thead>
     <tr>
       <th scope="col">No</th>
@@ -42,19 +42,17 @@
 
 
 </section>
+
+
 <script>
-
-  $(document).ready(function () {
-
-
-    $('#productsTable').wrap('<div id="hide" style="display:none"/>');
-
-    $('#hide').css('display', 'block');
-  });
+    $(document).ready(function () {
 
 
-  var table = $('#productsTable').DataTable();
+        $('#userTable').wrap('<div id="hide" style="display:none"/>');
+
+        $('#hide').css('display', 'block');
+    });
 
 
+    var table = $('#userTable').DataTable();
 </script>
-

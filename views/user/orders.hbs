@@ -1,5 +1,5 @@
  <section >
-  <table class="table table-bordered" style="height: 14vh;">
+  {{!-- <table class="table table-bordered" style="height: 14vh;">
   <thead>
     <tr>
       <th scope="col">NO</th>
@@ -13,11 +13,11 @@
        <th scope="col">ORDER STATUS</th>
 
     </tr>
-  </thead>
+  </thead> --}}
  
   <tbody>
     {{#each products}}
-    <tr>
+    {{!-- <tr>
       <th scope="row">{{inc @index}}</th>
       <td>{{this.deliveryAdress.name}}</td>
       <td>{{this.paymentMethod}}</td>
@@ -26,22 +26,21 @@
       <td>{{this.deliveryAdress.totalAmount}}</td>
       <td>{{this.deliveryAdress.adress}},{{this.deliveryAdress.country}},{{this.deliveryAdress.state}},{{this.deliveryAdress.city}},{{this.deliveryAdress.pincode}}</td>
       <td>
-       <a href="/view-order-products/{{this._id}}"><button class="btn btn-success my-2 py-2">View Producs</button></a> <br>
-       <a href="/delete-order-products/{{this._id}}"><button class="btn btn-danger" onclick="return confirm('Are you sure')" >Remove Order</button></a> <br>
-      </td>
+       <a href="/view-order-products/{{this._id}}"><button class="btn btn-success my-2 py-2">View Producs</button></a> <br> --}}
+   
+       {{!-- <a href="/delete-order-products/{{this._id}}"><button class="btn btn-danger" onclick="return confirm('Are you sure')" >Remove Order</button></a> <br> --}}
+      {{!-- </td>
       <td>{{this.deliveryStatus}}</td>
     </tr>
-    {{/each}}
   </tbody>
   
-</table>
+</table> --}}
 </section> 
 
 <div class="container">
     <article class="card">
         <header class="card-header"> My Orders / Tracking </header>
         <div class="card-body">
-                {{#each products}}
 
             <h6>Order ID: {{this._id}}</h6>
             <article class="card">
@@ -50,12 +49,11 @@
                     <div class="col"> <strong>Estimated Delivery time:</strong> <br>3 day</div>
                     <div class="col"> <strong>Shipping BY:</strong> <br>Watchzone <i class="fa fa-phone"> 1800-200-999</i> </div>
                     <div class="col"> <strong>Status:</strong> <br> {{this.deliveryStatus}} </div>
-                    <div class="col"> <strong>Tracking #:</strong> <br> {{this._id}}</div>
+                    <div class="col"> <strong>Tracking #:</strong> <br>Track {{this._id}}</div>
                 </div>
             </article>
-                                {{/each}}
+              
 
-            {{#each product}}
             {{#if pending}}
             <div class="track">
                 <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order Pending</span> </div>
@@ -90,26 +88,29 @@
             <hr>
             {{else}}
               <div class="track">
-                <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order canceled</span> </div>
+                <div class="step active"> <span class="icon "> <i class="fa fa-check"></i> </span> <span class="text" >Order canceled</span> </div>
                 {{!-- <div class="step active"> <span class="icon"> <i class="fa fa-user"></i> </span> <span class="text"> Order Placed</span> </div>
                 <div class="step active"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> Shipped </span> </div>
                 <div class="step active"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Ready for pickup</span> </div> --}}
             </div>
             <hr>
             {{/if}}
-            {{/each}}
 
             <ul class="row">
-                  {{#each orderProducts}}
 
                 <li class="col-md-4">
                     <figure class="itemside mb-3">
-                        <div class="aside"><img src="/product-images/{{this.products._id}}.jpeg" class="img-sm border"></div>
+                        <div class="aside"><img src="/product-images/{{this.lookupProducts._id}}.jpeg" class="img-sm border"></div>
                         <figcaption class="info align-self-center">
-                            <p class="title">{{this.products.name}} <br> </p> <span class="text-muted">RS{{this.products.price}}  </span>
+                            <p class="title">{{this.lookupProducts.name}} <br> </p> <span class="text-muted">RS{{this.lookupProducts.price}}  </span>
                         </figcaption>
                     </figure>
                 </li>
+                       <a href="/view-order-products/{{this._id}}"><button class="btn btn-success my-2 py-2">View Producs</button></a> 
+                       {{#if this.deliverd}}
+                      <a href="/invoice/{{this._id}}/{{this.lookupProducts._id}}" style="margin-left: 440px;" >Download invoice</a><br>
+{{/if}}
+
                 {{/each}}
              
             
