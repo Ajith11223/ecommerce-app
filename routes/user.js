@@ -433,9 +433,8 @@ router.get('/orders', verifyLogin, async (req, res, next) => {
     let wishListCount = null
     let orderCount = null
     let product = await userHelpers.orderProduct(users._id)
-
-    let orderId = product[0]._id
-    let orderProducts = await userHelpers.getOrderProduct(orderId)
+    
+  
     if (req.session.user) {
       cartCount = await userHelpers.getCartCount(users._id)
       wishListCount = await userHelpers.getWishListCount(users._id)
@@ -445,6 +444,9 @@ router.get('/orders', verifyLogin, async (req, res, next) => {
     let products = await userHelpers.getOrderTrack(users._id)
 
     if (orderCount > 0) {
+      let orderId = product[0]._id
+      let orderProducts = await userHelpers.getOrderProduct(orderId)
+    
       res.render('user/orders',
         { user: true, layout: 'user-layouts', users, cartCount, wishListCount, orderProducts, product, products })
     } else {

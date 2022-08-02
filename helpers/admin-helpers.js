@@ -314,6 +314,12 @@ module.exports = {
             let total = db.get().collection(collections.ORDER_COLLECTION).aggregate(
                 [
                     {
+                      '$match':{
+                        deliverd:true
+                      }
+                    },
+
+                    {
                         '$project': {
                             'deliveryAdress.totalAmount': 1
                         }

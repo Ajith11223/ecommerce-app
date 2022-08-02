@@ -96,7 +96,6 @@ router.post('/login',(req,res,next)=>{
       res.redirect('/admin/login')
        })
       }catch(err){
-        console.log();
         next(err)
       }
 })

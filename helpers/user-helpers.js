@@ -505,6 +505,7 @@ module.exports = {
             try {
                 let products = await db.get().collection(collections.ORDER_COLLECTION).find({ userId: ObjectId(userId) }).toArray()
                 resolve(products)
+                console.log(products);
             } catch (err) {
                 reject(err)
             }
@@ -513,6 +514,7 @@ module.exports = {
     },
     // get orderd products
     getOrderProduct: (orderId) => {
+
         return new Promise(async (resolve, reject) => {
             try {
                 let orderItems = await db.get().collection(collections.ORDER_COLLECTION).aggregate([
