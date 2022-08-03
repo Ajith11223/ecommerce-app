@@ -262,9 +262,13 @@ router.get('/product-details/:id', async (req, res, next) => {
       wishListCount = await userHelpers.getWishListCount(users._id)
     }
     let product = await productHelpers.getProductDetails(req.params.id)
-
-    res.render('user/product-details',
-      { user: true, layout: 'user-layouts', product, users, cartCount, wishListCount })
+if(product){
+  res.render('user/product-details',
+  { user: true, layout: 'user-layouts', product, users, cartCount, wishListCount })
+}else{
+  res.redirect('/shop')
+}
+    
   } catch (err) {
     console.log(err);
     next(err)
