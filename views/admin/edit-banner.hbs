@@ -6,12 +6,29 @@
             <form action="/admin/edit-banner/{{products._id}}" method="post" enctype="multipart/form-data" id="product">
                <label for="">Name</label>
                <input type="text" name="name" value="{{products.name}}" class="form-control" required>
-               <label for="">Status</label>
-               <input type="text" name="status" value="{{products.status}}" class="form-control" required>
+
+               <div class="checkout__order__widget">
+
+                  <label for="check-payment">
+                     true
+                     <input type="radio" id="check-payment" name="status" value="true" required>
+                     <span class="checkmark"></span>
+                  </label>
+                  <label for="paypal">
+                     false
+                     <input type="radio" id="paypal" name="status" value="false" required>
+                     <span class="checkmark"></span>
+                  </label>
+               </div>
+
+
+               {{!-- <label for="">Status</label>
+               <input type="text" name="status" value="{{products.status}}" class="form-control" required> --}}
 
 
                <label for="">Image</label>
-            <img src="/banner-images/{{products._id}}.jpeg" class="pl-5" alt="" width="90px" height="100px" id="imgView">
+               <img src="/banner-images/{{products._id}}.jpeg" class="pl-5" alt="" width="90px" height="100px"
+                  id="imgView">
 
                <input type="file" name="image" class="form-control" required>
 
@@ -25,9 +42,9 @@
 </section>
 <script>
 
-    function viewImage(event){
-        document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
-    }
+   function viewImage(event) {
+      document.getElementById('imgView').src = URL.createObjectURL(event.target.files[0])
+   }
 </script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
@@ -35,6 +52,5 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js">
 </script>
 <script>
-  $("#product").validate();
+   $("#product").validate();
 </script>
-

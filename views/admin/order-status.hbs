@@ -25,7 +25,7 @@
         <th scope="row">{{@index}}</th>
         <td scope="row">{{this.deliveryAdress.name}}</td>
         <td scope="row">{{this.paymentMethod}}</td>
-        <td>{{this.deliveryStatus}}</td>
+        <td scope="row">{{this.deliveryStatus}}</td>
         <td scope="row">{{this.deliveryAdress.mobile}}</td>
         <td scope="row">{{this.products.[0].status}}</td>
         {{!-- <td>{{this.deliveryAdress.date}}</td> --}}
@@ -35,7 +35,7 @@
         <td scope="row">
           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
 
-            <span class="d-none d-lg-inline-flex btn btn-primary">Change Status</span>
+            <span class="d-none d-lg-inline-flex btn btn-danger">Change Status</span>
           </a>
           <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
             <a href="/admin/change-status/{{this._id}}"><button class="btn btn-success"> deliverd </button></a>
@@ -66,16 +66,22 @@
 
         </td>
         <td scope="row">
-          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
 
-            <span class="d-none d-lg-inline-flex btn btn-success">Check status</span>
           </a>
-          <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-            <a class="btn btn-light">Deliverd : {{this.deliverd}}</a>
-            <a class="btn btn-light">Shipped : {{this.shipped}}</a>
-            <a class="btn btn-light">Placed : {{this.placed}}</a>
-            <a class="btn btn-light">Pending : {{this.pending}}</a>
+          {{#if this.deliverd}}
+            <a class="text-success ">Deliverd </a>
+          {{else if this.shipped}}
+            <a class="">Shipped </a> 
+               {{else if this.placed}}
 
+            <a class=" ">Placed </a>
+          {{else if this.pending}}
+
+            <a class="">Pending </a>
+            {{else}}
+               <a class="text-danger "> cancel</a>
+
+              {{/if}}
           </div>
 
         </td>

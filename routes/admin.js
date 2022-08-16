@@ -364,7 +364,13 @@ router.get('/categoryadd',verifyLogin,(req,res)=>{
 // category add post req 
 router.post('/categoryadd',verifyLogin,(req,res)=>{
 
- adminHelpers.addCategory1(req.body).then(()=>{
+ adminHelpers.addCategory1(req.body).then((status)=>{
+  if(status){
+    res.redirect('/admin/category-manage')
+    req.session.cate='already added'
+
+
+  }
   res.redirect('/admin/category-manage')
  })
 
@@ -396,9 +402,15 @@ router.get('/edit-categoryadd/:CId',verifyLogin,(req,res,next)=>{
 /// edit categry add post req
 router.post('/edit-categoryadd/:CID',verifyLogin,(req,res,next)=>{
   try{
-  adminHelpers.addCategory(req.body,req.params.CID).then(()=>{
-    res.redirect('/admin/category-manage')
-  })
+   
+      adminHelpers.addCategory(req.body,req.params.CID).then((status)=>{
+        if(status){
+          res.redirect('/admin/category-manage')
+        }
+        res.redirect('/admin/category-manage')
+      })
+    
+
 }catch(err){
   next(err)
 }
@@ -461,7 +473,7 @@ router.get('/add-banner',verifyLogin,(req,res)=>{
 router.post('/add-banner',verifyLogin,(req,res,next)=>{
   try{
   let data=req.body
-  data.status=true
+  // data.status=true
   producthelpers.addBanner(data).then((id)=>{
     let image=req.files.image
     image.mv('./public/banner-images/'+id+'.jpeg',(err,done)=>{

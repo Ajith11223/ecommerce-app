@@ -4,6 +4,10 @@
         {{!-- <a class="add btn btn-danger " href="/admin/add-products">Add Product</a> --}}
         <a class="add btn btn-danger " href="/admin/categoryadd">Add Category</a>
 
+
+        {{#if msg}}
+      <h3>{{msg}}</h3>
+        {{/if}}
         <table class="table mt-5 " id="productsTable">
             <thead>
                 <tr>

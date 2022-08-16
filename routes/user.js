@@ -47,13 +47,8 @@ router.get('/', async function (req, res, next) {
           })
       })
 
-
-
-
-
     })
   } catch (err) {
-    console.log(err);
     next(err)
   }
 
@@ -626,7 +621,7 @@ router.post('/cancel-order', verifyLogin, (req, res, next) => {
 router.post('/search', async (req, res, next) => {
   try {
     searchProducts = await userHelpers.searchProduct(req.body.search)
-    console.log(searchProducts);
+   
     res.redirect('/shop')
 
   } catch (err) {

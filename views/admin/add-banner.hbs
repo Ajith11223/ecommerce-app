@@ -6,8 +6,19 @@
             <form action="/admin/add-banner" method="post" enctype="multipart/form-data" id="product">
                <label for="">Name</label>
                <input type="text" name="name" class="form-control" required>
-               {{!-- <label for="">Status</label>
-               <input type="text" name="status" class="form-control" required> --}}
+               <div class="checkout__order__widget">
+
+                  <label for="check-payment">
+                     true
+                     <input type="radio" id="check-payment" name="status" value="true" required>
+                     <span class="checkmark"></span>
+                  </label>
+                  <label for="paypal">
+                     false
+                     <input type="radio" id="paypal" name="status" value="false" required>
+                     <span class="checkmark"></span>
+                  </label>
+               </div>
 
 
                <label for="">Image</label>

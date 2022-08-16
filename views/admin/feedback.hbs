@@ -10,7 +10,7 @@
     </div>
     <div class="container">
 
-        <table class="table mt-5 " id="userTable">
+        <table class="table mt-5 " id="usersTable1">
   <thead>
     <tr>
       <th scope="col">No</th>
@@ -26,10 +26,10 @@
     <tr>
       <th scope="row">{{inc @index}}</th>
       
-      <td>{{this.name}}</td>
-      <td>{{this.email}}</td>
-      <td>{{this.website}}</td>
-      <td>{{this.feedback}}</td>
+      <td scope="row">{{this.name}}</td>
+      <td scope="row">{{this.email}}</td>
+      <td scope="row">{{this.website}}</td>
+      <td scope="row">{{this.feedback}}</td>
      <td>
 
      </td>
@@ -48,11 +48,11 @@
     $(document).ready(function () {
 
 
-        $('#userTable').wrap('<div id="hide" style="display:none"/>');
+        $('#usersTable1').wrap('<div id="hide" style="display:none"/>');
 
         $('#hide').css('display', 'block');
     });
 
 
-    var table = $('#userTable').DataTable();
+    var table = $('#usersTable1').DataTable();
 </script>

@@ -84,10 +84,20 @@ module.exports = {
 
     // add category 
     addCategory1: (categoryData) => {
-        return new Promise((resolve, reject) => {
-            db.get().collection(collections.ADDCATEGORY_COLLECTION).insertOne(categoryData).then((response) => {
-                resolve(response)
-            })
+        return new Promise(async (resolve, reject) => {
+            let status = {}
+            let exist = await db.get().collection(collections.ADDCATEGORY_COLLECTION).findOne({ name: categoryData.name })
+            if (exist) {
+                status.exist = true
+                resolve(status)
+            } else {
+
+                db.get().collection(collections.ADDCATEGORY_COLLECTION).insertOne(categoryData).then(() => {
+                    resolve(status)
+                })
+            }
+
+
         })
 
     },
@@ -135,17 +145,25 @@ module.exports = {
     },
     // edit category add
     addCategory: (cateData, cateId) => {
-        return new Promise((resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             try {
+                let status = {}
+                let exist = await db.get().collection(collections.ADDCATEGORY_COLLECTION).findOne({ name:cateData.name })
+                if (exist) {
+                    status.exist = true
+                    resolve(status)
+                }else{
+
                 db.get().collection(collections.ADDCATEGORY_COLLECTION).updateOne({ _id: ObjectId(cateId) },
                     {
                         $set: {
                             name: cateData.name
                         }
                     }
-                ).then((responce) => {
-                    resolve(responce)
+                ).then((status) => {
+                    resolve(status)
                 })
+            }
             } catch (err) {
                 reject(err)
             }
@@ -314,9 +332,9 @@ module.exports = {
             let total = db.get().collection(collections.ORDER_COLLECTION).aggregate(
                 [
                     {
-                      '$match':{
-                        deliverd:true
-                      }
+                        '$match': {
+                            deliverd: true
+                        }
                     },
 
                     {
